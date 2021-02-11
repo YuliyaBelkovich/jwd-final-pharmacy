@@ -94,7 +94,7 @@ private RecipeProlongationRequestDao(){}
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException();
+            throw new DAOException("Database issues");
         }
     }
 }

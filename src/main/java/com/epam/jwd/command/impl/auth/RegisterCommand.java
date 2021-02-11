@@ -1,19 +1,18 @@
 package com.epam.jwd.command.impl.auth;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.exception.ValidationException;
-import com.epam.jwd.service.RegisterService;
+import com.epam.jwd.service.auth.RegisterService;
 import com.epam.jwd.service.mail.MailService;
 
 public class RegisterCommand implements Command {
 
-    private static final ResponseContext REGISTER_ERROR_FIELD = () -> "/pharmacy?command=go_to_register_page";
-    private static final ResponseContext REGISTER_SUCCESS = () -> "/pharmacy?command=go_to_login_page";
+    private static final ResponseContext REGISTER_SUCCESS = () -> "/pharmacy?command=go_to_login_page&message=Registration+was+successfull.+Please,+log+in";
 
     @Override
     public ResponseContext execute(RequestContext requestContext) {
@@ -33,10 +32,9 @@ public class RegisterCommand implements Command {
             name = requestContext.getParameter("user_name");
             role = requestContext.getParameter("user_role");
         } else {
-            requestContext.getSession().setAttribute("Error", "Missing mandatory field");
-            return REGISTER_ERROR_FIELD;
+            return () -> "/pharmacy?command=go_to_register_page&error=Missing+mandatory+field";
         }
-
+        System.out.println(name);
         if (password.equals(confirmedPassword)) {
             try {
                 if (role.equals("PATIENT")) {
@@ -47,14 +45,12 @@ public class RegisterCommand implements Command {
                     RegisterService.register(email, password, name, role, "PENDING");
                 }
             } catch (DAOException | FactoryException | EntityNotFoundException | ValidationException e) {
-                requestContext.getSession().setAttribute("Error", e.getMessage());
+                return () -> "/pharmacy?command=go_to_register_page&error=User+already+exists";
             }
         } else {
-            requestContext.getSession().setAttribute("Error", "Passwords doesn't match");
-            return REGISTER_ERROR_FIELD;
+            return () -> "/pharmacy?command=go_to_register_page&error=Passwords+doesn't+match";
         }
 
-        requestContext.getSession().setAttribute("Error", "");
         MailService.getInstance().sendTextEmail(email,"Registration confirmation","You've just registered on SACRED HEART PHARMACY site! Congrats!");
         return REGISTER_SUCCESS;
     }

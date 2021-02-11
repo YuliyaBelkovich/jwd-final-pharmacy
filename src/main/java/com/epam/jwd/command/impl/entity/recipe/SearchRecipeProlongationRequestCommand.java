@@ -1,23 +1,19 @@
 package com.epam.jwd.command.impl.entity.recipe;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.PageName;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.RecipeProlongationRequestCriteria;
 import com.epam.jwd.domain.RecipeProlongationRequest;
 import com.epam.jwd.domain.RecipeRequestStatus;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
-import com.epam.jwd.exception.UnknownEntityException;
-import com.epam.jwd.service.impl.RecipeProlongationRequestService;
+import com.epam.jwd.service.entity.impl.RecipeProlongationRequestService;
 
 import java.util.List;
 
 public class SearchRecipeProlongationRequestCommand implements Command {
-    private static final ResponseContext REQUEST_NOT_FOUND = PageName.SEARCH_RECIPE_REQUEST::getJspFileName;
-    private static final ResponseContext SEARCH_RESULT = PageName.SEARCH_RECIPE_REQUEST_RESULT::getJspFileName;
 
     @Override
     public ResponseContext execute(RequestContext requestContext) {
@@ -25,13 +21,14 @@ public class SearchRecipeProlongationRequestCommand implements Command {
         int recipeId = 0;
         int doctorId = 0;
         RecipeRequestStatus status = null;
+        String url = (String) requestContext.getSession().getAttribute("previousPage");
         if (requestContext.hasParameter("request_status")) {
-            try {
+//            try {
                 status = RecipeRequestStatus.resolveStatusByDBName(requestContext.getParameter("request_status"));
-            } catch (UnknownEntityException e) {
-                requestContext.setAttribute("Error", "Status should be PENDING CONFIRMED or REJECTED");
-                return REQUEST_NOT_FOUND;
-            }
+//            } catch (UnknownEntityException e) {
+//                requestContext.setAttribute("Error", "Status should be PENDING CONFIRMED or REJECTED");
+//                return () -> url;
+//            }
         }
         if (requestContext.hasParameter("request_id")) {
             id = Integer.parseInt(requestContext.getParameter("request_id"));
@@ -53,9 +50,9 @@ public class SearchRecipeProlongationRequestCommand implements Command {
             requests = RecipeProlongationRequestService.getInstance().findByCriteria(criteria);
         } catch (EntityNotFoundException | DAOException e) {
             requestContext.setAttribute("Error", "Request not found");
-            return REQUEST_NOT_FOUND;
+            return () -> url;
         }
         requestContext.setAttribute("Request", requests);
-        return SEARCH_RESULT;
+        return () -> url;
     }
 }

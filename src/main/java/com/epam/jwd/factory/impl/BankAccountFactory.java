@@ -3,10 +3,12 @@ package com.epam.jwd.factory.impl;
 import com.epam.jwd.domain.BankAccount;
 import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.factory.EntityFactory;
+import org.apache.log4j.Logger;
 
 public class BankAccountFactory implements EntityFactory<BankAccount> {
 
     private static BankAccountFactory bankAccountFactory = new BankAccountFactory();
+    private static final Logger logger = Logger.getLogger(BankAccountFactory.class);
 
     private BankAccountFactory (){}
 
@@ -24,6 +26,7 @@ public class BankAccountFactory implements EntityFactory<BankAccount> {
                     (String) args[4],
                     (int) args[5]);
         } catch (ClassCastException e){
+            logger.error(e.getMessage());
             throw new FactoryException("Wrong arguments during the creation of the BankAccount object");
         }
         return bankAccount;

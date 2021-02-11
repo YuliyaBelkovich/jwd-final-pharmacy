@@ -1,9 +1,9 @@
 package com.epam.jwd.command.impl.entity.user;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
-import com.epam.jwd.command.PageName;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
+import com.epam.jwd.context.PageName;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.UserCriteria;
 import com.epam.jwd.domain.Role;
@@ -11,8 +11,7 @@ import com.epam.jwd.domain.User;
 import com.epam.jwd.domain.UserStatus;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
-import com.epam.jwd.exception.UnknownEntityException;
-import com.epam.jwd.service.impl.UserService;
+import com.epam.jwd.service.entity.impl.UserService;
 
 import java.util.List;
 
@@ -43,8 +42,7 @@ public class SearchUserCommand implements Command {
         if (requestContext.hasParameter("user_status")) {
             status = requestContext.getParameter("user_status");
         }
-        Criteria<User> criteria = null;
-        try {
+        Criteria<User> criteria;
             criteria = UserCriteria.builder()
                     .id(id)
                     .setName(name)
@@ -52,9 +50,6 @@ public class SearchUserCommand implements Command {
                     .setRole(Role.resolveRoleByDBName(role))
                     .setStatus(UserStatus.resolveStatusByDBName(status))
                     .build();
-        } catch (UnknownEntityException e) {
-            e.printStackTrace();
-        }
         List<User> users;
         try {
             users = UserService.getInstance().findByCriteria(criteria);

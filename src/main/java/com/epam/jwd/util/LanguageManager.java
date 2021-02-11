@@ -30,5 +30,9 @@ public class LanguageManager {
         resourceBundle = ResourceBundle.getBundle("text", current);
     }
 
+    public ResourceBundle getBundle(){
+        return resourceBundle;
+    }
+
 
 }

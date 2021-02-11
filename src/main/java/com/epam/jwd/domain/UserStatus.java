@@ -1,7 +1,5 @@
 package com.epam.jwd.domain;
 
-import com.epam.jwd.exception.UnknownEntityException;
-
 import java.util.Arrays;
 
 public enum UserStatus {
@@ -20,11 +18,10 @@ public enum UserStatus {
         return dbName;
     }
 
-    public static UserStatus resolveStatusByDBName(String baseName) throws UnknownEntityException {
+    public static UserStatus resolveStatusByDBName(String baseName)  {
         if (baseName == null) {
             return null;
         }
-        //todo return null
         return Arrays.stream(values()).filter(status -> status.getDbName().equals(baseName)).findAny().get();
     }
 }

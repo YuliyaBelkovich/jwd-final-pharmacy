@@ -11,7 +11,6 @@ public class ConnectionPool {
     private static ConnectionPool connectionPool;
     private static ArrayBlockingQueue<ConnectionProxy> availableConnections;
     private static ApplicationProperties properties = ApplicationProperties.getInstance();
-    // private  ArrayBlockingQueue<ConnectionProxy> usedConnections;
 
     private ConnectionPool() {
     }
@@ -28,7 +27,6 @@ public class ConnectionPool {
 
     private static void createConnections(String url, String user, String password, final int maxConnectionNumber) {
         availableConnections = new ArrayBlockingQueue<>(maxConnectionNumber);
-        // usedConnections = new ArrayBlockingQueue<>(maxConnectionNumber);
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -40,10 +38,21 @@ public class ConnectionPool {
             try {
                 ConnectionProxy connection = new ConnectionProxy(DriverManager.getConnection(url, user, password));
                 availableConnections.offer(connection);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
         }
+    }
+
+    public void closePool(){
+        for(ConnectionProxy connectionProxy : availableConnections){
+            try {
+                connectionProxy.realClose();
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
+        availableConnections.clear();
     }
 
     public ConnectionProxy retrieveConnection() {

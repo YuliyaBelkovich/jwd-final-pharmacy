@@ -95,7 +95,7 @@ public class BankAccountDao extends AbstractDao<BankAccount> {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException();
+            throw new DAOException("Database issues");
         }
     }
 }

@@ -1,7 +1,5 @@
 package com.epam.jwd.domain;
 
-import com.epam.jwd.exception.UnknownEntityException;
-
 import java.util.Arrays;
 
 public enum RecipeRequestStatus {
@@ -19,9 +17,9 @@ public enum RecipeRequestStatus {
         return dbName;
     }
 
-    public static RecipeRequestStatus resolveStatusByDBName(String baseName) throws UnknownEntityException {
+    public static RecipeRequestStatus resolveStatusByDBName(String baseName) {
         if (baseName == null) {
-            throw new UnknownEntityException();
+            return null;
         }
         return Arrays.stream(values()).filter(status -> status.getDbName().equals(baseName)).findAny().get();
     }

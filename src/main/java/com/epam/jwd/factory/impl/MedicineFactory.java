@@ -3,10 +3,12 @@ package com.epam.jwd.factory.impl;
 import com.epam.jwd.factory.EntityFactory;
 import com.epam.jwd.domain.Medicine;
 import com.epam.jwd.exception.FactoryException;
+import org.apache.log4j.Logger;
 
 public class MedicineFactory implements EntityFactory<Medicine> {
 
     private static MedicineFactory medicineFactory = new MedicineFactory();
+    private static final Logger logger = Logger.getLogger(MedicineFactory.class);
 
     private MedicineFactory() {
     }
@@ -26,6 +28,7 @@ public class MedicineFactory implements EntityFactory<Medicine> {
                     (String) args[4],
                     (double) args[5]);
         } catch (ClassCastException e) {
+            logger.error(e.getMessage());
             throw new FactoryException("Wrong arguments during the creation of the Medicine object");
         }
         return medicine;

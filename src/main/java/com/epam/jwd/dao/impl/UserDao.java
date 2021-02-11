@@ -100,7 +100,7 @@ public class UserDao extends AbstractDao<User> {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException();
+            throw new DAOException("Database issues");
         }
     }
 }

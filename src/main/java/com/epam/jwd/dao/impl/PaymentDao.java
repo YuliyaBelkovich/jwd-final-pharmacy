@@ -94,7 +94,7 @@ public class PaymentDao extends AbstractDao<Payment> {
                 }
             }
         } catch (SQLException ex) {
-            throw new DAOException();
+            throw new DAOException("Database issues");
         }
     }
 }

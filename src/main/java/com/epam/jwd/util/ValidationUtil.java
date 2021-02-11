@@ -3,13 +3,12 @@ package com.epam.jwd.util;
 import com.epam.jwd.annotation.RoleValidation;
 import com.epam.jwd.annotation.StringValidation;
 import com.epam.jwd.domain.Entity;
-import com.epam.jwd.domain.Role;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.exception.ValidationException;
-import com.epam.jwd.service.impl.UserService;
+import com.epam.jwd.service.entity.impl.UserService;
+import org.apache.log4j.Logger;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -17,27 +16,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidationUtil {
+    private static final Logger logger = Logger.getLogger(ValidationUtil.class);
 
-    public static <T extends Entity> boolean validateEntity(T entity) throws ValidationException, EntityNotFoundException, DAOException {
-        boolean isValid = false;
+    public static <T extends Entity> boolean validateEntity(T entity) throws ValidationException {
         for (Field field : entity.getClass().getDeclaredFields()) {
             Class c = field.getType();
-            if (c.equals(Integer.class)) {
-                isValid = validateInt(field, entity);
-            } else if (c.equals(Double.class)) {
-                isValid = validateDouble(field, entity);
+            if (c.equals(int.class)) {
+               validateInt(field, entity);
+            } else if (c.equals(double.class)) {
+                validateDouble(field, entity);
             } else if (c.equals(String.class)) {
-                isValid = validateString(field, entity);
+                validateString(field, entity);
             } else if (c.equals(LocalDateTime.class)) {
-                isValid = validateDate(field, entity);
-            } else {
-                isValid = true;
+               validateDate(field, entity);
             }
         }
-        return isValid;
+        return true;
     }
 
-    public static <T extends Entity> boolean validateInt(Field field, T t) throws ValidationException, DAOException, EntityNotFoundException {
+    public static <T extends Entity> boolean validateInt(Field field, T t) throws ValidationException {
         field.setAccessible(true);
         int value;
         try {
@@ -46,11 +43,17 @@ public class ValidationUtil {
             throw new ValidationException("Unable to validate field " + field.getName() + ", access denied ");
         }
 
-        if (value > 0) {
+        if (value >= 0) {
             if (Arrays.stream(field.getDeclaredAnnotations()).anyMatch(annotation -> annotation.annotationType().equals(RoleValidation.class))) {
                 RoleValidation annotation = field.getAnnotation(RoleValidation.class);
-                return UserService.getInstance().findById(value).getRole().getBaseName().equals(annotation.role());
+                try {
+                    return UserService.getInstance().findById(value).getRole().getBaseName().equals(annotation.role());
+                } catch (EntityNotFoundException | DAOException e) {
+                    logger.error(e.getMessage());
+                    throw new ValidationException("Unable to validate field " + field.getName());
+                }
             }
+
             return true;
         } else {
             throw new ValidationException("Field " + field.getName() + " can not be less than zero");

@@ -96,7 +96,7 @@ public class AppointmentDao extends AbstractDao<Appointment> {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Database exception");
+            throw new DAOException("Database issues");
         }
     }
 

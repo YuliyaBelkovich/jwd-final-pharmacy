@@ -75,7 +75,7 @@ public class OrderDao extends AbstractDao<Order> {
                 orders.add(order);
             }
         } catch (SQLException | FactoryException exception) {
-            throw new DAOException(exception.getMessage());
+            throw new DAOException("Database issues. Please, try later.");
         }
         return orders;
     }
@@ -87,7 +87,7 @@ public class OrderDao extends AbstractDao<Order> {
                 medicineIdList.put(rs.getInt("medicine_id"), rs.getInt("amount"));
             }
         } catch (SQLException exception) {
-            throw new DAOException(exception.getMessage());
+            throw new DAOException("Database issues. Please, try later.");
         }
         return medicineIdList;
     }
@@ -119,9 +119,9 @@ public class OrderDao extends AbstractDao<Order> {
                 connection.rollback();
                 connection.setAutoCommit(true);
             } catch (SQLException ex) {
-                throw new DAOException();
+                throw new DAOException("Database issues. Please, try later.");
             }
-            throw new DAOException();
+            throw new DAOException("Database issues. Please, try later.");
         } finally {
             closeConnection();
         }
@@ -157,9 +157,9 @@ public class OrderDao extends AbstractDao<Order> {
                 connection.rollback();
                 connection.setAutoCommit(true);
             } catch (SQLException ex) {
-                throw new DAOException();
+                throw new DAOException("Database issues. Please, try later.");
             }
-            throw new DAOException();
+            throw new DAOException("Database issues. Please, try later.");
         } finally {
             closeConnection();
         }
@@ -194,9 +194,9 @@ public class OrderDao extends AbstractDao<Order> {
                 connection.rollback();
                 connection.setAutoCommit(true);
             } catch (SQLException ex) {
-                throw new DAOException();
+                throw new DAOException("Database issues. Please, try later.");
             }
-            throw new DAOException();
+            throw new DAOException("Database issues. Please, try later.");
         } finally {
             closeConnection();
         }
@@ -233,9 +233,9 @@ public class OrderDao extends AbstractDao<Order> {
                 connection.rollback();
                 connection.setAutoCommit(true);
             } catch (SQLException ex) {
-                throw new DAOException();
+                throw new DAOException("Database issues. Please, try later.");
             }
-            throw new DAOException();
+            throw new DAOException("Database issues. Please, try later.");
         } finally {
             closeConnection();
         }

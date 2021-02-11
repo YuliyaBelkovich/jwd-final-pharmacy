@@ -33,7 +33,7 @@ public class RecipeFactory implements EntityFactory<Recipe> {
                     (int) args[5],
                     (LocalDate) args[6]);
         } catch (ClassCastException e){
-            logger.error("Class cast exception");
+            logger.error(e.getMessage());
             throw new FactoryException("Wrong arguments while creating the Recipe object");
         }
         return recipe;

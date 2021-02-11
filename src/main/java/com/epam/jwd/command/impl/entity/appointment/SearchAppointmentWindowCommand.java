@@ -1,23 +1,21 @@
 package com.epam.jwd.command.impl.entity.appointment;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.PageName;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.criteria.AppointmentWindowCriteria;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.WindowStatus;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
-import com.epam.jwd.exception.UnknownEntityException;
-import com.epam.jwd.service.impl.AppointmentWindowService;
+import com.epam.jwd.service.entity.impl.AppointmentWindowService;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class SearchAppointmentWindowCommand implements Command {
-    private static final ResponseContext SEARCH_RESULT = PageName.SEARCH_APPOINTMENT_WINDOW_PAGE::getJspFileName;
+  //  private static final ResponseContext SEARCH_RESULT = PageName.SEARCH_APPOINTMENT_WINDOW_PAGE::getJspFileName;
 
     @Override
     public ResponseContext execute(RequestContext requestContext) {

@@ -28,7 +28,7 @@ public class PaymentFactory implements EntityFactory<Payment> {
                     (String) args[2] ,
                     (LocalDateTime) args[3]);
         } catch (ClassCastException e){
-            logger.error("Class cast exception");
+            logger.error(e.getMessage());
             throw new FactoryException("Wrong arguments while creating the PAYMENT object");
         }
         return payment;

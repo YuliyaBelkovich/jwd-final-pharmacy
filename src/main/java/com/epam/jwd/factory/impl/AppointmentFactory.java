@@ -1,6 +1,5 @@
 package com.epam.jwd.factory.impl;
 
-import com.epam.jwd.exception.UnknownEntityException;
 import com.epam.jwd.factory.EntityFactory;
 import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.AppointmentStatus;
@@ -31,7 +30,7 @@ public class AppointmentFactory implements EntityFactory<Appointment> {
                     (String) args[4],
                     AppointmentStatus.resolveStatusByDBName((String) args[5]));
         } catch (ClassCastException e){
-            logger.error("Exception");
+            logger.error(e.getMessage());
             throw new FactoryException("Wrong arguments during the creation of the Appointment object");
         }
         return appointment;

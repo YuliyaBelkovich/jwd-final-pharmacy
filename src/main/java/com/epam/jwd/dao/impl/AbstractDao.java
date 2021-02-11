@@ -6,12 +6,15 @@ import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.pool.ConnectionPool;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
+
+    private static Logger logger = Logger.getLogger(AbstractDao.class);
 
     private Connection connection;
 
@@ -46,7 +49,8 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
             ResultSet rs = statement.executeQuery();
             searchResult = parseResultSet(rs);
         } catch (SQLException ex) {
-            throw new DAOException();
+            logger.error(ex.getMessage());
+            throw new DAOException("Database issues. Please, try later.");
         }
         closeConnection();
         if (!searchResult.isEmpty()) {
@@ -65,11 +69,12 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
             ResultSet rs = statement.executeQuery();
             searchResult = parseResultSet(rs);
         } catch (SQLException ex) {
-            throw new DAOException();
+            logger.error(ex.getMessage());
+            throw new DAOException("Database issues. Please, try later.");
         }
         closeConnection();
         if (searchResult != null) {
-            return searchResult.get(1);
+            return searchResult.get(0);
         } else {
             throw new EntityNotFoundException();
         }
@@ -81,7 +86,8 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
             statement.setInt(1, entity.getId());
             statement.executeUpdate();
         } catch (SQLException ex) {
-            throw new DAOException();
+            logger.error(ex.getMessage());
+            throw new DAOException("Database issues. Please, try later.");
         }
         closeConnection();
     }
@@ -106,7 +112,8 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
         } catch (SQLException e) {
-            throw new DAOException();
+            logger.error(e.getMessage());
+            throw new DAOException("Database issues. Please, try later.");
         }
         closeConnection();
         return list;
@@ -116,7 +123,8 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
         try {
             connection.close();
         } catch (SQLException e) {
-            throw new DAOException("Unable to close connection");
+            logger.error(e.getMessage());
+            throw new DAOException("Database issues. Please, try later.");
         }
         connection = null;
     }

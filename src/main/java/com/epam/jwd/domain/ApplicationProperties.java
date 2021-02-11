@@ -14,7 +14,11 @@ public class ApplicationProperties {
     private final String password;
     private final int initConnections;
     private final int maxConnections;
+    private static String propertiesFileName;
 
+    public static void setPropertiesFileName(String propertiesFileName) {
+        ApplicationProperties.propertiesFileName = propertiesFileName;
+    }
 
     private ApplicationProperties(String url, String dbName, String user, String password, int initConnections, int maxConnections) {
         this.url = url;
@@ -26,7 +30,7 @@ public class ApplicationProperties {
     }
 
     public static ApplicationProperties getInstance(){
-        Properties properties = new PropertyReaderUtil().loadProperties("C:/Users/Asus/IdeaProjects/jwd-final-pharmacy/src/main/resources/application.properties");
+        Properties properties = new PropertyReaderUtil().loadProperties(propertiesFileName);
         applicationProperties = new ApplicationProperties(properties.getProperty("url"),
                 properties.getProperty("dbName"),
                 properties.getProperty("user"),

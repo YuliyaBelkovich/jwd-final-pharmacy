@@ -5,8 +5,11 @@
   Time: 23:57
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
+<fmt:setBundle basename="${sessionScope.rb}" var="rb"/>
 <html>
 <head>
 
@@ -19,144 +22,49 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 
-    <title>REGISTRATION</title>
+    <title><fmt:message key="registration.header" bundle="${rb}"/></title>
 </head>
 <body>
-<style type="text/css">
-    BODY {
-        background: white;
-    }
-    A {
-        color: black;
-    }
-    A:visited {
-        color: #565353;
-    }
-    A:active {
-        color: red;
-    }
-</style>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d45a6c;">
-    <div class="container-fluid">
-        <a href="/pharmacy?command=go_to_main_page" class="navbar-brand">SACRED HEART PHARMACY</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="nav navbar-nav">
-                <c:if test="${sessionScope.user_role=='GUEST'}">
-                    <a class="nav-link" href="/pharmacy?command=go_to_login_page">log in</a>
-                </c:if>
-                <c:if test="${sessionScope.user_role=='GUEST'}">
-                    <a class="nav-link" href="/pharmacy?command=go_to_register_page">register</a>
-                </c:if>
-                <c:if test="${sessionScope.user_role!='GUEST'}">
-                    <a class="nav-link" href="/pharmacy?command=log_out">log out</a>
-                </c:if>
-                <c:if test="${sessionScope.user_role=='GUEST' or sessionScope.user_role=='PATIENT'}">
-                    <a class="nav-link" href="/pharmacy?command=go_to_basket_page">basket</a>
-                </c:if>
-                <c:if test="${sessionScope.user_role!='GUEST'}">
-                    <a class="nav-link" href="/pharmacy?command=go_to_user_main_page">my profile</a>
-                </c:if>
-                <a class="nav-link" href=""><small>ru</small></a>
-                <a class="nav-link" href=""><small>en</small></a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<%--USER NAVIGATION BAR--%>
-
-<nav class="nav"style="background-color: #dec6cb;" >
-    <div class="container-fluid">
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link" href="/pharmacy?command=go_to_search_medicine_page">MEDICINES</a>
-            </li>
-
-            <c:if test="${sessionScope.user_role!='GUEST'}">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="/pharmacy?command=go_to_search_doctor_page">DOCTORS</a>
-                </li>
-                </c:if>
-                <c:if test="${sessionScope.user_role=='DOCTOR' or sessionScope.user_role=='PHARMACIST' }">
-                    <c:if test="${sessionScope.user_status=='ACTIVE'}">
-                        <li class="nav-item">
-                            <a class="nav-link"
-                               href="/pharmacy?command=go_to_search_patient_page">PATIENTS</a>
-                        </li>
-                    </c:if>
-                </c:if>
-                <c:if test="${sessionScope.user_role=='PHARMACIST'}">
-                    <li class="nav-item"><a class="nav-link"
-                                            href="/pharmacy?command=go_to_search_order_page">ORDERS</a></li>
-                </c:if>
-
-                <c:if test="${sessionScope.user_role=='PHARMACIST'  or sessionScope.user_role=='DOCTOR'}">
-                    <li class="nav-item"><a class="nav-link"
-                                            href="/pharmacy?command=go_to_search_appointment_page">APPOINTMENTS</a></li>
-                </c:if>
-
-                <c:if test="${sessionScope.user_role=='PHARMACIST'}">
-                    <li class="nav-item"><a class="nav-link"
-                                            href="/pharmacy?command=go_to_search_payment_page">PAYMENTS</a></li>
-                </c:if>
-                <c:if test="${sessionScope.user_role=='DOCTOR' or sessionScope.user_role=='PHARMACIST' }">
-                    <c:if test="${sessionScope.user_status=='ACTIVE'}">
-                        <li class="nav-item"><a
-                                class="nav-link"
-                                href="/pharmacy?command=go_to_search_recipe_page">RECIPES</a></li>
-                    </c:if>
-                </c:if>
-            </ul>
-    </div>
-</nav>
+<c:import url="MainHeader.jsp"/>
 <div class="p-3 mb-2 bg-light text-black" class="needs-validation" novalidate>
     <form action="${pageContext.request.contextPath}/pharmacy" method="POST">
         <input type="hidden" name="command" value="register">
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label for="exampleInputEmail1"><fmt:message key="registration.email" bundle="${rb}"/></label>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="<fmt:message key="registration.email.placeholder" bundle="${rb}"/>" required>
+            <small id="emailHelp" class="form-text text-muted"><fmt:message key="login.email.info" bundle="${rb}"/></small>
         </div>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" name="user_role" id="exampleRadios1" value="DOCTOR" checked required>
             <label class="form-check-label" for="exampleRadios1">
-                I'm a doctor
+                <fmt:message key="registration.doctor" bundle="${rb}"/>
             </label>
         </div>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" name="user_role" id="exampleRadios2" value="PATIENT" required>
             <label class="form-check-label" for="exampleRadios2">
-                I'm a patient
+                <fmt:message key="registration.patient" bundle="${rb}"/>
             </label>
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+            <label for="exampleInputPassword1"><fmt:message key="login.password" bundle="${rb}"/></label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="<fmt:message key="login.password" bundle="${rb}"/>" required>
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword2">Repeat password</label>
-            <input type="password" name="confirmed_password" class="form-control" id="exampleInputPassword2" placeholder="Repeat password" required>
+            <label for="exampleInputPassword2"><fmt:message key="registration.password.repeat" bundle="${rb}"/></label>
+            <input type="password" name="confirmed_password" class="form-control" id="exampleInputPassword2" placeholder="<fmt:message key="registration.password.repeat" bundle="${rb}"/>" required>
         </div>
         <div class="form-group">
-            <label for="userName">Name</label>
-            <input type="text" name="user_name" class="form-control" id="userName" placeholder="Name" required>
+            <label for="userName"><fmt:message key="registration.name" bundle="${rb}"/></label>
+            <input type="text" name="user_name" class="form-control" id="userName" placeholder="<fmt:message key="registration.name" bundle="${rb}"/>" required>
         </div>
         <p class="text-danger">${sessionScope.Error}</p>
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary"><fmt:message key="registration.register" bundle="${rb}"/></button>
     </form>
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
             'use strict'
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.querySelectorAll('.needs-validation')
 
             // Loop over them and prevent submission

@@ -1,15 +1,15 @@
 package com.epam.jwd.command.impl.entity.order;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.PageName;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.PageName;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.OrderCriteria;
 import com.epam.jwd.domain.Order;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
-import com.epam.jwd.service.impl.OrderService;
+import com.epam.jwd.service.entity.impl.OrderService;
 
 import java.util.List;
 

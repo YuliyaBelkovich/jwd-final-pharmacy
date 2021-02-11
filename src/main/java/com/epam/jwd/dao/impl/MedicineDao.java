@@ -93,7 +93,7 @@ public class MedicineDao extends AbstractDao<Medicine> {
                 }
             }
         } catch (SQLException ex) {
-            throw new DAOException();
+            throw new DAOException("Database issues");
         }
     }
 

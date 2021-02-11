@@ -1,17 +1,16 @@
 package com.epam.jwd.command.impl.entity.recipe;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.PageName;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.PageName;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.RecipeCriteria;
 import com.epam.jwd.domain.Recipe;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
-import com.epam.jwd.service.impl.RecipeService;
+import com.epam.jwd.service.entity.impl.RecipeService;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 

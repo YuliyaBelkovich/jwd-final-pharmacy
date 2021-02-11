@@ -1,11 +1,8 @@
 package com.epam.jwd;
 
 import com.epam.jwd.context.PharmacyContext;
-import com.epam.jwd.domain.*;
-import com.epam.jwd.service.impl.*;
 import com.epam.jwd.service.mail.MailService;
-
-import java.time.LocalDateTime;
+import com.epam.jwd.util.PDFCreatorUtil;
 
 public class Main {
 
@@ -27,6 +24,5 @@ public class Main {
 //        Order order = OrderService.getInstance().createEntity(0, 5.40, 0, "NOT PAID", orderedMedicines);
 //        order.toString();
 
-        MailService.getInstance().sendPDFEmail("lily.belkovich@gmail.com","test","test","vlkerhaifulkjdncljkvelkrjvbdslkjfrekjekjvmcx,,xx,v,fke;akandmdgkfjhfdkvjnekjrnkejvnkjvnfkevjnekjvnkevnkjf");
     }
 }

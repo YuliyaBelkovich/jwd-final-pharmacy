@@ -13,6 +13,7 @@ public class PharmacyContext implements ApplicationContext {
     private static PharmacyCache pharmacyCacheContext = PharmacyCache.getInstance();
     private static ApplicationProperties applicationProperties;
     private static ConnectionPool connectionPool;
+    private static final String PROPERTIES_FILE_NAME = "C:/Users/Asus/IdeaProjects/jwd-final-pharmacy/src/main/resources/application.properties";
 
     private PharmacyContext() {
     }
@@ -22,6 +23,7 @@ public class PharmacyContext implements ApplicationContext {
     }
 
     public void init() {
+        ApplicationProperties.setPropertiesFileName(PROPERTIES_FILE_NAME);
         applicationProperties = ApplicationProperties.getInstance();
         connectionPool = ConnectionPool.getInstance();
         try {

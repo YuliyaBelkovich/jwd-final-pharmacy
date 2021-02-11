@@ -4,6 +4,7 @@ import com.epam.jwd.annotation.RoleValidation;
 import com.epam.jwd.annotation.StringValidation;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Appointment implements Entity {
     private int id;
@@ -83,5 +84,18 @@ public class Appointment implements Entity {
                 ", info='" + info + '\'' +
                 ", appointmentStatus=" + appointmentStatus +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Appointment that = (Appointment) o;
+        return id == that.id && patientId == that.patientId && doctorId == that.doctorId && dateTime.equals(that.dateTime) && Objects.equals(info, that.info) && appointmentStatus == that.appointmentStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, patientId, doctorId, dateTime, info, appointmentStatus);
     }
 }

@@ -1,16 +1,14 @@
 package com.epam.jwd.command.impl.auth;
 
-import com.epam.jwd.command.Basket;
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.domain.User;
 import com.epam.jwd.exception.AuthenticationException;
-import com.epam.jwd.service.LogInService;
+import com.epam.jwd.service.auth.LogInService;
 
 public class LogInCommand implements Command {
 
-    private static final ResponseContext LOGIN_ERROR_FIELD = () -> "/pharmacy?command=go_to_login_page";
     private static final ResponseContext LOG_IN = () -> "/pharmacy?command=go_to_main_page";
 
 
@@ -22,15 +20,13 @@ public class LogInCommand implements Command {
             email = requestContext.getParameter("email");
             password = requestContext.getParameter("password");
         } else {
-            requestContext.getSession().setAttribute("Error", "Missing mandatory field");
-            return LOGIN_ERROR_FIELD;
+            return () -> "/pharmacy?command=go_to_login_page&error=Missing+mandatory+field";
         }
-        User user = null;
+        User user;
         try {
             user = LogInService.logIn(email, password);
         } catch (AuthenticationException e) {
-            requestContext.getSession().setAttribute("Error", e.getMessage());
-            return LOGIN_ERROR_FIELD;
+            return ()->"/pharmacy?command=go_to_login_page&error="+e.getMessage().replace(" ","+");
         }
         requestContext.getSession().setAttribute("user_name", user.getName());
         requestContext.getSession().setAttribute("user_id", user.getId());

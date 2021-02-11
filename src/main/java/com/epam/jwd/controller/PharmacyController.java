@@ -1,8 +1,8 @@
 package com.epam.jwd.controller;
 
-import com.epam.jwd.command.CommandName;
+import com.epam.jwd.command.CommandManager;
 import com.epam.jwd.command.CommandType;
-import com.epam.jwd.command.impl.CustomRequestContext;
+import com.epam.jwd.context.CustomRequestContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +17,8 @@ public class PharmacyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String command = req.getParameter("command");
-        CommandType type = CommandName.resolveCommandByName(command).getType();
-        String page = CommandName.resolveCommandByName(command).execute(new CustomRequestContext(req)).getPage();
+        CommandType type = CommandManager.resolveCommandByName(command).getType();
+        String page = CommandManager.resolveCommandByName(command).execute(new CustomRequestContext(req)).getPage();
         if (type.equals(CommandType.FORWARD)) {
             req.getRequestDispatcher(page).forward(req, resp);
         } else {
@@ -26,11 +26,12 @@ public class PharmacyController extends HttpServlet {
         }
     }
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String command = req.getParameter("command");
-        CommandType type = CommandName.resolveCommandByName(command).getType();
-        String page = CommandName.resolveCommandByName(command).execute(new CustomRequestContext(req)).getPage();
+        CommandType type = CommandManager.resolveCommandByName(command).getType();
+        String page = CommandManager.resolveCommandByName(command).execute(new CustomRequestContext(req)).getPage();
         if (type.equals(CommandType.FORWARD)) {
             req.getRequestDispatcher(page).forward(req, resp);
         } else {

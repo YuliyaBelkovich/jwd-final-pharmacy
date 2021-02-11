@@ -1,15 +1,14 @@
 package com.epam.jwd.command.impl.entity.bank;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.PageName;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.criteria.BankAccountCriteria;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.domain.BankAccount;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
-import com.epam.jwd.service.impl.BankAccountService;
+import com.epam.jwd.service.entity.impl.BankAccountService;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class SearchBankAccountCommand implements Command {
             requestContext.setAttribute("Error", "Bank account not found");
             return () -> url;
         }
-        requestContext.setAttribute("bankAccount", bankAccounts);
+        requestContext.setAttribute("BankAccount", bankAccounts);
         return () -> url;
     }
 }

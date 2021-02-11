@@ -1,9 +1,11 @@
 package com.epam.jwd.filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+@WebFilter(urlPatterns = "/pharmacy")
 public class XSSFilter implements Filter {
 
     @Override

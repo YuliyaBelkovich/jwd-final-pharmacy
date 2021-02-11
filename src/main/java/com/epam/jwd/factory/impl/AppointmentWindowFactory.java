@@ -3,15 +3,15 @@ package com.epam.jwd.factory.impl;
 import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.WindowStatus;
 import com.epam.jwd.exception.FactoryException;
-import com.epam.jwd.exception.UnknownEntityException;
 import com.epam.jwd.factory.EntityFactory;
+import org.apache.log4j.Logger;
 
 import java.time.LocalDateTime;
 
 public class AppointmentWindowFactory implements EntityFactory<AppointmentWindow> {
 
     private static AppointmentWindowFactory factory = new AppointmentWindowFactory();
-
+    private static final Logger logger = Logger.getLogger(AppointmentWindowFactory.class);
     private AppointmentWindowFactory() {
     }
 
@@ -29,6 +29,7 @@ public class AppointmentWindowFactory implements EntityFactory<AppointmentWindow
                     WindowStatus.resolveStatusByDBName((String) args[3])
             );
         } catch (ClassCastException e) {
+            logger.error(e.getMessage());
             throw new FactoryException("Wrong arguments during the creation of the AppointmentWindow object");
         }
         return appointmentWindow;

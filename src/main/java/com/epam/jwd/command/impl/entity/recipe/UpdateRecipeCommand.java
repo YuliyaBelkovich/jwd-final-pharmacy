@@ -1,18 +1,17 @@
 package com.epam.jwd.command.impl.entity.recipe;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.domain.Recipe;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.exception.ValidationException;
 import com.epam.jwd.factory.impl.RecipeFactory;
-import com.epam.jwd.service.impl.RecipeService;
+import com.epam.jwd.service.entity.impl.RecipeService;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class UpdateRecipeCommand implements Command {
     @Override
@@ -38,19 +37,15 @@ public class UpdateRecipeCommand implements Command {
             dose = Double.parseDouble(requestContext.getParameter("recipe_dose"));
             duration = Integer.parseInt(requestContext.getParameter("recipe_duration"));
         } else {
-            requestContext.getSession().setAttribute("Error", "Missing mandatory field");
-            return () -> url;
+            return () -> url + "&error=Missing+mandatory+field";
         }
         Recipe recipe;
         try {
             recipe = RecipeFactory.getInstance().create(id, patientId, medicineId, dose, duration, doctorId, LocalDate.now());
             RecipeService.getInstance().update(recipe);
         } catch (FactoryException | DAOException | EntityNotFoundException | ValidationException e) {
-            requestContext.getSession().setAttribute("Error", e.getMessage());
-            return () -> url;
+            return () -> url + "&error=" + e.getMessage().replace(" ", "+");
         }
-        requestContext.getSession().setAttribute("Error", "");
-        requestContext.getSession().setAttribute("Message", "Recipe updated!\n");
-        return () -> url;
+        return () -> url + "&message=Recipe+updated!";
     }
 }

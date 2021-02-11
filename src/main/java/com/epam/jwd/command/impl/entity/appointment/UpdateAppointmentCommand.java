@@ -1,15 +1,15 @@
 package com.epam.jwd.command.impl.entity.appointment;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.exception.ValidationException;
 import com.epam.jwd.factory.impl.AppointmentFactory;
-import com.epam.jwd.service.impl.AppointmentService;
+import com.epam.jwd.service.entity.impl.AppointmentService;
 
 import java.time.LocalDateTime;
 
@@ -36,8 +36,7 @@ public class UpdateAppointmentCommand implements Command {
             doctorId = Integer.parseInt(requestContext.getParameter("appointment_doctor"));
             dateTime = LocalDateTime.parse(requestContext.getParameter("appointment_date"));
         } else {
-            requestContext.getSession().setAttribute("Error", "Missing mandatory field");
-            return () -> url;
+            return () -> url + "&error=Missing+mandatory+field";
         }
 
         Appointment appointment;
@@ -45,12 +44,9 @@ public class UpdateAppointmentCommand implements Command {
             appointment = AppointmentFactory.getInstance().create(id, patientId, doctorId, dateTime, info, status);
             AppointmentService.getInstance().update(appointment);
         } catch (FactoryException | EntityNotFoundException | DAOException | ValidationException e) {
-            requestContext.getSession().setAttribute("Error", e.getMessage());
-            return () -> url;
+            return () -> url + "&" + e.getMessage().replace(" ", "+");
         }
-        requestContext.getSession().setAttribute("Error", "");
-        requestContext.getSession().setAttribute("Message", "Appointment edited !\n");
         requestContext.getSession().setAttribute("previousPage", requestContext.getUrl());
-        return () -> url;
+        return () -> url + "&message=Appointment+updated!";
     }
 }

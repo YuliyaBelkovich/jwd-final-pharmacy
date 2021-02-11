@@ -1,7 +1,5 @@
 package com.epam.jwd.domain;
 
-import com.epam.jwd.exception.UnknownEntityException;
-
 import java.util.Arrays;
 
 public enum WindowStatus {

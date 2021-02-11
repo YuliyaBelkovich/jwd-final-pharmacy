@@ -1,16 +1,15 @@
 package com.epam.jwd.command.impl;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.PageName;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.PageName;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.domain.Entity;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
-import com.epam.jwd.service.EntityService;
+import com.epam.jwd.service.entity.EntityService;
 
 public class EntityPageCommand <T extends Entity> implements Command {
-    private static final ResponseContext ENTITY_NOT_FOUND = PageName.ENTITY_NOT_FOUND::getJspFileName;
     private EntityService<T> service;
     private String entityName;
     private PageName entityPage;
@@ -24,12 +23,11 @@ public class EntityPageCommand <T extends Entity> implements Command {
     @Override
     public ResponseContext execute(RequestContext requestContext) {
         int id = Integer.parseInt(requestContext.getParameter(entityName + "_id"));
-        Entity entity;
+        Entity entity =null;
         try {
             entity = service.findById(id);
         } catch (EntityNotFoundException | DAOException e) {
-            requestContext.setAttribute("Name", entityName);
-            return ENTITY_NOT_FOUND;
+            requestContext.setAttribute("Name", entityName + "not found");
         }
         requestContext.setAttribute(entityName, entity);
         requestContext.getSession().setAttribute("previousPage",requestContext.getUrl());

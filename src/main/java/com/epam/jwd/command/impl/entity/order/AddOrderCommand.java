@@ -1,24 +1,21 @@
 package com.epam.jwd.command.impl.entity.order;
 
-import com.epam.jwd.command.Basket;
+import com.epam.jwd.domain.Basket;
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.domain.Medicine;
 import com.epam.jwd.domain.Order;
-import com.epam.jwd.domain.OrderStatus;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.exception.ValidationException;
-import com.epam.jwd.service.impl.OrderService;
+import com.epam.jwd.service.entity.impl.OrderService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class AddOrderCommand implements Command {
-    private static final ResponseContext ADD_ORDER_FAIL = () -> "/pharmacy?command=go_to_basket_page";
-    private static final ResponseContext ADD_ORDER_SUCCESS = () -> "/pharmacy?command=go_to_add_payment_page";
 
     @Override
     public ResponseContext execute(RequestContext requestContext) {
@@ -37,12 +34,10 @@ public class AddOrderCommand implements Command {
             order = OrderService.getInstance().createEntity(0, totalPrice, patientId, "NOT PAID", orderedMedicines);
         } catch (FactoryException | DAOException | ValidationException | EntityNotFoundException e) {
             requestContext.getSession().setAttribute("Error", e.getMessage() + " error");
-            return ADD_ORDER_FAIL;
+            return () -> "/pharmacy?command=go_to_basket_page&error=" + e.getMessage().replace(" ", "+");
         }
-        requestContext.getSession().setAttribute("Error", "");
         requestContext.getSession().setAttribute("order", order);
-        requestContext.getSession().setAttribute("previousPage",requestContext.getUrl());
-        requestContext.getSession().setAttribute("Message", "Order created!\n");
-        return ADD_ORDER_SUCCESS;
+        requestContext.getSession().setAttribute("previousPage", requestContext.getUrl());
+        return () -> "/pharmacy?command=go_to_add_payment_page";
     }
 }

@@ -1,7 +1,7 @@
 package com.epam.jwd.filter;
 
-import com.epam.jwd.command.CommandName;
-import com.epam.jwd.command.PageName;
+import com.epam.jwd.command.CommandManager;
+import com.epam.jwd.context.PageName;
 import com.epam.jwd.domain.Role;
 
 import javax.servlet.*;
@@ -20,7 +20,7 @@ public class PharmacyFilter implements Filter {
 
     @Override
    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        List<Role> roles = CommandName.resolveCommandByName(servletRequest.getParameter("command")).getRoles();
+        List<Role> roles = CommandManager.resolveCommandByName(servletRequest.getParameter("command")).getRoles();
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String userRole = (String) request.getSession().getAttribute("user_role");
         if (!roles.isEmpty()) {

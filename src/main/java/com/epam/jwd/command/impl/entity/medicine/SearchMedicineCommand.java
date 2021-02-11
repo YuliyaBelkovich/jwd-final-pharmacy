@@ -1,15 +1,15 @@
 package com.epam.jwd.command.impl.entity.medicine;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
-import com.epam.jwd.command.PageName;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
+import com.epam.jwd.context.PageName;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.MedicineCriteria;
 import com.epam.jwd.domain.Medicine;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
-import com.epam.jwd.service.impl.MedicineService;
+import com.epam.jwd.service.entity.impl.MedicineService;
 
 import java.util.List;
 
@@ -19,6 +19,7 @@ public class SearchMedicineCommand implements Command {
 
     @Override
     public ResponseContext execute(RequestContext requestContext) {
+
         String nameMedicine = null;
         boolean recipe_requirement = false;
         boolean non_recipe_requirement = false;

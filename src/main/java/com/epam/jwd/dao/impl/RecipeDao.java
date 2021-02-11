@@ -103,7 +103,7 @@ public class RecipeDao extends AbstractDao<Recipe> {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("sql ex");
+            throw new DAOException("Database issues");
         }
     }
 

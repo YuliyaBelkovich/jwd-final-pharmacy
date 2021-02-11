@@ -1,13 +1,13 @@
 package com.epam.jwd.command.impl.entity.appointment;
 
 import com.epam.jwd.command.Command;
-import com.epam.jwd.command.RequestContext;
-import com.epam.jwd.command.ResponseContext;
+import com.epam.jwd.context.RequestContext;
+import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.exception.ValidationException;
-import com.epam.jwd.service.impl.AppointmentWindowService;
+import com.epam.jwd.service.entity.impl.AppointmentWindowService;
 
 import java.time.LocalDateTime;
 

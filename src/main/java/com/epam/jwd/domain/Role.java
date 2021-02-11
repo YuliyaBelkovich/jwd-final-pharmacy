@@ -1,7 +1,5 @@
 package com.epam.jwd.domain;
 
-import com.epam.jwd.exception.UnknownEntityException;
-
 import java.util.Arrays;
 
 public enum Role {
@@ -20,9 +18,9 @@ public enum Role {
         return baseName;
     }
 
-    public static Role resolveRoleByDBName(String baseName) throws UnknownEntityException {
+    public static Role resolveRoleByDBName(String baseName){
         if(baseName==null){
-            throw new UnknownEntityException();
+            return null;
         }
         return Arrays.stream(values()).filter(role -> role.getBaseName().equals(baseName)).findAny().get();
     }
