@@ -23,8 +23,6 @@ import java.security.spec.InvalidKeySpecException;
 public class RegisterService {
 
     public static void register(String email, String password, String name, String role, String status) throws DAOException, FactoryException, EntityNotFoundException, ValidationException {
-        //todo validation?
-
         try {
             password = HashingUtil.hash(password);
         } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {

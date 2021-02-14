@@ -1,6 +1,7 @@
 package com.epam.jwd.pool;
 
 import com.epam.jwd.domain.ApplicationProperties;
+import com.epam.jwd.exception.DAOException;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -26,14 +27,14 @@ public class ConnectionPoolTest {
 
 
     @Test
-    public void testRetrieveConnection() {
+    public void testRetrieveConnection() throws DAOException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         Connection connection = connectionPool.retrieveConnection();
         assertNotNull(connection);
     }
 
     @Test
-    public void testRetrieveNotSameConnection() {
+    public void testRetrieveNotSameConnection() throws DAOException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         Connection connection1 = connectionPool.retrieveConnection();
         Connection connection2 = connectionPool.retrieveConnection();

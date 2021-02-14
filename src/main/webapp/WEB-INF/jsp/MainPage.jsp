@@ -26,23 +26,20 @@
 </head>
 <c:import url="MainHeader.jsp"/>
 <div>
-    <h1 class="display-6"><p class="text-center">SACRED HEART PHARMACY is more than you think!</p></h1>
-    <p class="lead text-center">Our pharmacy offers not only a broad range of medications, herbals, and wellness
-        cosmetics — with the help of our service you can make a doctor's appointment, refill your prescription and buy
-        the prescribed medication!</p>
-    <p class="text-secondary text-center">All products and medications undergo state registration and certification by
-        the relevant authorities of the Ministry of Health of the Republic of Belarus.</p>
+    <h1 class="display-6"><p class="text-center"><fmt:message key="intro.header" bundle="${rb}"/></p></h1>
+    <p class="lead text-center"><fmt:message key="intro.1" bundle="${rb}"/></p>
+    <p class="text-secondary text-center"><fmt:message key="intro.2" bundle="${rb}"/></p>
 </div>
 <img src="<c:url value="/pharmacy-background.jpg"/>" class="img-fluid" alt="pharmacy">
 
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <h3><p class="lead text-primary text-center">YOU CAN</p></h3>
+        <h3><p class="lead text-primary text-center"><fmt:message key="abilities.header" bundle="${rb}"/></p></h3>
         <ul class="list-style">
-            <li>Buy OTC and prescribed medications</li>
-            <li>Make an appointment for a consult or to get a prescription</li>
-            <li>Request to refill your prescription in case of the prescription expiration</li>
+            <li><fmt:message key="abilities.list.1" bundle="${rb}"/></li>
+            <li><fmt:message key="abilities.list.2" bundle="${rb}"/></li>
+            <li><fmt:message key="abilities.list.3" bundle="${rb}"/></li>
         </ul>
     </div>
     <div class="col-md-4"></div>
@@ -51,10 +48,10 @@ ________________________________________________________________________________
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-        <h3><p class="lead text-primary text-center">How to order? It's easy!</p></h3>
+        <h3><p class="lead text-primary text-center"><fmt:message key="abilities.order.header" bundle="${rb}"/></p></h3>
         <ul>
-            <li>Choose needed products in the online catalog or by the search, purchase</li>
-            <li>Await an e-mail with the order number and a call from our operator to confirm the date and time of receiving an order</li>
+            <li><fmt:message key="abilities.order.1" bundle="${rb}"/></li>
+            <li><fmt:message key="abilities.order.2" bundle="${rb}"/></li>
         </ul>
     </div>
     <div class="col-md-3"></div>
@@ -64,35 +61,47 @@ ________________________________________________________________________________
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-9">
-        <h2><p class="lead text-danger text-center">Attention!</p></h2>
-        <h3><p class="lead text-dark text-center">Some types of medications require a prescription. To purchase them without the prescription you need to:</p></h3>
+        <h2><p class="lead text-danger text-center"><fmt:message key="attention.header" bundle="${rb}"/></p></h2>
+        <h3><p class="lead text-dark text-center"><fmt:message key="attention.info" bundle="${rb}"/></p></h3>
         <ul>
-            <li>Register in our system</li>
-            <li>Choose a needed specialist and make an appointment</li>
-            <li>Await an e-mail with the order number and a call from our operator to confirm the appointment date and time</li>
+            <li><fmt:message key="attention.info.1" bundle="${rb}"/></li>
+            <li><fmt:message key="attention.info.2" bundle="${rb}"/></li>
+            <li><fmt:message key="attention.info.3" bundle="${rb}"/></li>
         </ul>
     </div>
     <div class="col-md-2"></div>
 </div>
 ______________________________________________________________________________________________________________________________________________________________________________________________
 
-<h3><p class="lead text-primary">To refill an expiring prescription you need to:</p></h3>
-<ul>
-<li>Log in to the system by your name and password</li>
-    <li>Find your doctor and fill out the application form for the refill</li>
-    <li>Wait for the refill to appear in 2-3 workdays</li>
-</ul>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-9">
+        <h2><p class="lead text-danger text-center"><fmt:message key="prescription.header" bundle="${rb}"/></p></h2>
+        <ul>
+            <li><fmt:message key="prescription.list.1" bundle="${rb}"/></li>
+            <li><fmt:message key="prescription.list.2" bundle="${rb}"/></li>
+            <li><fmt:message key="prescription.list.3" bundle="${rb}"/></li>
+        </ul>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+______________________________________________________________________________________________________________________________________________________________________________________________
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-9">
+        <h2><p class="lead text-danger text-center"><fmt:message key="staff.header" bundle="${rb}"/></p></h2>
+        <h3><p class="lead text-dark text-center"><fmt:message key="staff.info" bundle="${rb}"/></p></h3>
+        <ul>
+            <li><fmt:message key="staff.list.1" bundle="${rb}"/></li>
+            <li><fmt:message key="staff.list.2" bundle="${rb}"/></li>
+            <li><fmt:message key="staff.list.3" bundle="${rb}"/></li>
+        </ul>
+    </div>
+    <div class="col-md-2"></div>
+</div>
 ______________________________________________________________________________________________________________________________________________________________________________________________
 
-<h3><p class="lead text-primary">For med staff:</p></h3>
-<p class="text-dark">To join our med staff base you need to sign up to our system by choosing the med staff category. We will need 2-3 workdays to confirm your status as a medic professional. This will give you access to:</p>
-<ul>
-    <li>Control prescriptions of your patients</li>
-    <li>Easily contact your patients if needed</li>
-    <li>Quickly refill prescriptions</li>
-</ul>
-______________________________________________________________________________________________________________________________________________________________________________________________
-
-<h2><p class="text-center">Come join!</p></h2>
+<h2><p class="text-center"><fmt:message key="join" bundle="${rb}"/></p></h2>
 </body>
 </html>
