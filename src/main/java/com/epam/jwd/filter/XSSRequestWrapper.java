@@ -4,6 +4,9 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+/**
+ * Class responsible for storing request patterns and executing request validation
+ */
 public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
     private static Pattern[] patterns = new Pattern[]{

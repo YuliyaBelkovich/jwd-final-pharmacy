@@ -12,6 +12,10 @@ import com.epam.jwd.util.HashingUtil;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
+/**
+ * Class responsible for the log in operation
+ * Performs checking the presence of the given combination of e-mail and password in the cache and database
+ */
 public class LogInService {
 
     public static User logIn(String email, String password) throws AuthenticationException {

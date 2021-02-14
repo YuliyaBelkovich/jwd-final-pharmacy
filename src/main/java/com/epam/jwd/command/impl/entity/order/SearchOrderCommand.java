@@ -6,13 +6,17 @@ import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.OrderCriteria;
+import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.Order;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.service.entity.impl.OrderService;
 
 import java.util.List;
-
+/**
+ * Class responsible for searching the {@link Order}
+ * Returns error message when order window not found
+ */
 public class SearchOrderCommand implements Command {
 
     private static final ResponseContext SEARCH_RESULT = PageName.SEARCH_ORDER_PAGE::getJspFileName;

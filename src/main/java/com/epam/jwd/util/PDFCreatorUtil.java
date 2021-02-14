@@ -9,9 +9,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Random;
 
+/**
+ * Class responsible for creating the PDF invoices to send it after performed payment
+ */
 public class PDFCreatorUtil {
-    private static int id = 654;
+    private static int id = (int) (Math.random()*1000);
 
     public static File createPDF(String text) throws IOException, URISyntaxException, DocumentException {
         Document document = new Document();

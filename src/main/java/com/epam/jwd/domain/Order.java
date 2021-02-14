@@ -4,6 +4,12 @@ import com.epam.jwd.annotation.RoleValidation;
 
 import java.util.Map;
 
+/**
+ * Class represents order entity
+ * Order can be created for {@link User} with {@link Role} patient and for guest
+ * field patientId for guest sets null
+ * Order can have status PAID or NOT PAID, depending of created {@link Payment} class
+ */
 public class Order implements Entity {
 
     private int id;

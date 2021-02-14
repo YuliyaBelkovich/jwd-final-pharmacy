@@ -10,6 +10,15 @@ import com.epam.jwd.exception.ValidationException;
 import com.epam.jwd.service.auth.RegisterService;
 import com.epam.jwd.service.mail.MailService;
 
+/**
+ * Command responsible for registration
+ * Calls {@link RegisterService}
+ * If registration is successful sends e-mail to user with the information about next actions
+ * For doctor sets {@link com.epam.jwd.domain.UserStatus} PENDING
+ * Patient is always active at the start
+ * Returns error message when required field is missing or given user e-mail is already exists
+ *
+ */
 public class RegisterCommand implements Command {
 
     private static final ResponseContext REGISTER_SUCCESS = () -> "/pharmacy?command=go_to_login_page&message=Registration+was+successfull.+Please,+log+in";

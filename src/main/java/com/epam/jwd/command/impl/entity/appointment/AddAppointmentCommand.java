@@ -20,6 +20,12 @@ import com.epam.jwd.service.mail.MailService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Command responsible for adding new {@link com.epam.jwd.domain.Appointment}
+ * Returns error message if mandatory field is missing or if the error occur on the inner levels
+ * Sends e-mail to the doctor and patient about forthcoming appointment
+ * Sets {@link WindowStatus} to BUSY for the given {@link AppointmentWindow} object
+ */
 public class AddAppointmentCommand implements Command {
 
     @Override
@@ -36,14 +42,14 @@ public class AddAppointmentCommand implements Command {
             doctorId = Integer.parseInt(requestContext.getParameter("appointment_doctor"));
             dateTime = LocalDateTime.parse(requestContext.getParameter("appointment_date"));
         } else {
-            return () -> url+"&error=Missing+mandatory+field";
+            return () -> url + "&error=Missing+mandatory+field";
         }
 
 
         try {
             AppointmentService.getInstance().createEntity(0, patientId, doctorId, dateTime, null, "PLANNED");
         } catch (FactoryException | DAOException | ValidationException | EntityNotFoundException e) {
-            return () -> url+"&"+e.getMessage().replace(" ","+");
+            return () -> url + "&" + e.getMessage().replace(" ", "+");
         }
 
         Criteria<AppointmentWindow> criteria = AppointmentWindowCriteria.builder().setDoctorId(doctorId).setDateTime(dateTime).build();
@@ -58,10 +64,10 @@ public class AddAppointmentCommand implements Command {
             patient = UserService.getInstance().findById(patientId);
             doctor = UserService.getInstance().findById(doctorId);
         } catch (DAOException | ValidationException | EntityNotFoundException e) {
-            return () -> url+"&"+e.getMessage().replace(" ","+");
+            return () -> url + "&" + e.getMessage().replace(" ", "+");
         }
         MailService.getInstance().sendTextEmail(doctor.getEmail(), "New Appointment", "Patient " + patient.getName() + " is signed up for an appointment " + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         MailService.getInstance().sendTextEmail(patient.getEmail(), "New Appointment", "You've just signed up for an appointment to dr." + doctor.getName() + ". In case of cancellation please contact doctor. Email:  " + doctor.getEmail() + ". Your appointment will take place at " + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-        return () -> url+"&message=Appointment+created!";
+        return () -> url + "&message=Appointment+created!";
     }
 }

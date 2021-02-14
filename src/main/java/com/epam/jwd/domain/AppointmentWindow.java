@@ -6,10 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * id {@link int}
- * doctorId {@link int}
- * dateTime {@link LocalDateTime} - date and time available for doctor
- * status {@link WindowStatus}
+ * Domain class representing timeslot entity for {@link User} timetable with {@link Role} doctor.
  */
 public class AppointmentWindow implements Entity {
 

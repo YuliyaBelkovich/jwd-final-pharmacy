@@ -4,6 +4,7 @@ import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.RecipeProlongationRequestCriteria;
 import com.epam.jwd.dao.EntityDao;
 import com.epam.jwd.dao.impl.RecipeProlongationRequestDao;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.RecipeProlongationRequest;
 import com.epam.jwd.domain.RecipeRequestStatus;
 import com.epam.jwd.factory.EntityFactory;
@@ -13,7 +14,10 @@ import com.epam.jwd.service.entity.EntityService;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
-
+/**
+ * Service class for {@link RecipeProlongationRequest} class
+ * Performs CRUD operations
+ */
 public class RecipeProlongationRequestService  implements EntityService<RecipeProlongationRequest> {
     private static RecipeProlongationRequestService instance = new RecipeProlongationRequestService();
 

@@ -6,6 +6,7 @@ import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.context.PageName;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.UserCriteria;
+import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.Role;
 import com.epam.jwd.domain.User;
 import com.epam.jwd.domain.UserStatus;
@@ -14,7 +15,10 @@ import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.service.entity.impl.UserService;
 
 import java.util.List;
-
+/**
+ * Class responsible for searching the {@link User}
+ * Returns error message when user window not found
+ */
 public class SearchUserCommand implements Command {
 
     private static final ResponseContext SEARCH_PATIENT_RESULT = PageName.SEARCH_PATIENT_PAGE::getJspFileName;

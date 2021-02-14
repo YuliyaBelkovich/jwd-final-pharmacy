@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Abstract class with database access functions
  *
- * @param <T>
+ * @param <T> - entity
  */
 public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
 
@@ -27,7 +27,7 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
         return connection;
     }
 
-    public Connection getConnection() {
+    public Connection getConnection() throws DAOException {
         return connection = ConnectionPool.getInstance().retrieveConnection();
     }
 
@@ -168,7 +168,7 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
 
     /**
      * Returns {@link Connection} to the connection pool
-     * @throws DAOException
+     * @throws DAOException - when connection can't be returned to the pool due to SQL error
      */
     public void closeConnection() throws DAOException {
         try {

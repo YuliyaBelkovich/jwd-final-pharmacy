@@ -9,6 +9,10 @@ import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.service.entity.EntityService;
 
+/**
+ * Command responsible for going to the given entity page
+ * @param <T>
+ */
 public class EntityPageCommand <T extends Entity> implements Command {
     private EntityService<T> service;
     private String entityName;

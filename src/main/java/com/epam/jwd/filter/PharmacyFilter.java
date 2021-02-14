@@ -11,6 +11,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Filter for {@link com.epam.jwd.controller.PharmacyController}
+ * Responsible for managing the access to different {@link com.epam.jwd.command.Command}
+ * Sends to the error page when {@link Role} doesn't matches the list of allowed roles described in {@link CommandManager}
+ */
 @WebFilter(urlPatterns = "/pharmacy")
 public class PharmacyFilter implements Filter {
 

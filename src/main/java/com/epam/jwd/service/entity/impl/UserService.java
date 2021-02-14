@@ -4,6 +4,7 @@ import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.UserCriteria;
 import com.epam.jwd.dao.EntityDao;
 import com.epam.jwd.dao.impl.UserDao;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Role;
 import com.epam.jwd.domain.User;
 import com.epam.jwd.domain.UserStatus;
@@ -14,7 +15,10 @@ import com.epam.jwd.service.entity.EntityService;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
-
+/**
+ * Service class for {@link User} class
+ * Performs CRUD operations
+ */
 public class UserService implements EntityService<User> {
 
     private static UserService userService;

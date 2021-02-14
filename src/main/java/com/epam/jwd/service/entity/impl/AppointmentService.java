@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for {@link Appointment} class
+ * Performs CRUD operations
+ */
 public class AppointmentService implements EntityService<Appointment> {
 
     private static AppointmentService appointmentService;

@@ -16,6 +16,11 @@ import com.epam.jwd.service.entity.impl.RecipeService;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Command responsible for adding {@link Medicine} objects to {@link Basket} and updating the total price
+ * Checks if medicine requires recipe and automatically sets amount of the ordered medicine as described in the recipe
+ * Sends error message if user is trying to add to the basket medicine, that requires recipe, and doesn't has it
+ */
 public class AddToBasketCommand implements Command {
 
     @Override

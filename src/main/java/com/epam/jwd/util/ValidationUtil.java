@@ -15,6 +15,11 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Util class responsible for validating the entity objects
+ * Has default validation and validaton with annotations
+ * If annotation is present, checks is the given field matches the conditions described in the annotation
+ */
 public class ValidationUtil {
     private static final Logger logger = Logger.getLogger(ValidationUtil.class);
 

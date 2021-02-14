@@ -5,6 +5,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * Filter to prevent XSS attacks
+ */
 @WebFilter(urlPatterns = "/pharmacy")
 public class XSSFilter implements Filter {
 

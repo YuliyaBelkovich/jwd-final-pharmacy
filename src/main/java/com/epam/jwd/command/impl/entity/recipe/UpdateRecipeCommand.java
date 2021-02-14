@@ -3,6 +3,7 @@ package com.epam.jwd.command.impl.entity.recipe;
 import com.epam.jwd.command.Command;
 import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Recipe;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
@@ -12,7 +13,10 @@ import com.epam.jwd.factory.impl.RecipeFactory;
 import com.epam.jwd.service.entity.impl.RecipeService;
 
 import java.time.LocalDate;
-
+/**
+ * Class responsible for updating the {@link Recipe} object
+ * Requires all fields to update
+ */
 public class UpdateRecipeCommand implements Command {
     @Override
     public ResponseContext execute(RequestContext requestContext) {

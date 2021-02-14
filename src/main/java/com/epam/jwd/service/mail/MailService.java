@@ -1,5 +1,8 @@
 package com.epam.jwd.service.mail;
 
+/**
+ * Service class for sending e-mail
+ */
 public class MailService {
     private static MailService instance = new MailService();
 

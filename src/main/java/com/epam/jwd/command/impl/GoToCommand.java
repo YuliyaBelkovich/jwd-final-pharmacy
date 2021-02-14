@@ -5,6 +5,9 @@ import com.epam.jwd.context.PageName;
 import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
 
+/**
+ * Command responsible for navigating to different pages
+ */
 public class GoToCommand implements Command {
 
     private ResponseContext PAGE;

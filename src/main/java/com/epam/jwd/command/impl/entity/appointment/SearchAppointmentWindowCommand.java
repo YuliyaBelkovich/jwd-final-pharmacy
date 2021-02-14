@@ -14,6 +14,10 @@ import com.epam.jwd.service.entity.impl.AppointmentWindowService;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Class responsible for searching the {@link AppointmentWindow}
+ * Returns error message when appointment window not found
+ */
 public class SearchAppointmentWindowCommand implements Command {
 
     @Override

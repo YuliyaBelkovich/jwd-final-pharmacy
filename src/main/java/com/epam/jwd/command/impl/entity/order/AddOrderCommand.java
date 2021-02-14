@@ -15,6 +15,10 @@ import com.epam.jwd.service.entity.impl.OrderService;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Command responsible for adding new {@link Order} based on the current state of {@link Basket} object
+ * Returns error message if mandatory field is missing or if the error occur on the inner levels
+ */
 public class AddOrderCommand implements Command {
 
     @Override

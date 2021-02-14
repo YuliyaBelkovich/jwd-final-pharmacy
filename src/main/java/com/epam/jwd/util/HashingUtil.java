@@ -9,13 +9,10 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
 
+/**
+ * Class responsible for hashing the password using SHA-1 algorithm
+ */
 public class HashingUtil {
-    private static byte[] salt = new byte[16];
-
-    static {
-        SecureRandom random = new SecureRandom();
-        random.nextBytes(salt);
-    }
 
     public static String hash(String passwordToHash) throws InvalidKeySpecException, NoSuchAlgorithmException {
 

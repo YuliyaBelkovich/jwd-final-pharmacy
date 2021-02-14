@@ -4,6 +4,7 @@ import com.epam.jwd.criteria.BankAccountCriteria;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.dao.impl.BankAccountDao;
 import com.epam.jwd.dao.EntityDao;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.BankAccount;
 import com.epam.jwd.factory.EntityFactory;
 import com.epam.jwd.factory.impl.BankAccountFactory;
@@ -12,7 +13,10 @@ import com.epam.jwd.service.entity.EntityService;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
-
+/**
+ * Service class for {@link BankAccount} class
+ * Performs CRUD operations
+ */
 public class BankAccountService  implements EntityService<BankAccount> {
 
     private static BankAccountService bankAccountService;

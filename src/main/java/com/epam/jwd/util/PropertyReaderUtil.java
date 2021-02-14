@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Util class responsible for loading application properties from the given file
+ */
 public class PropertyReaderUtil {
 
     private final Properties properties = new Properties();

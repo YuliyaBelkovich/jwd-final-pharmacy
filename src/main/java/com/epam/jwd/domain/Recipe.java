@@ -6,6 +6,12 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * Representation of recipe entity
+ * Created by {@link User} with {@link Role} doctor for {@link User} with {@link Role} patient
+ * Has {@link Medicine} id
+ * Can expire due to the end of the validity period, but stored in database forever
+ */
 public class Recipe implements Entity {
 
     private int id;

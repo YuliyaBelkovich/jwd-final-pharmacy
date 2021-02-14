@@ -2,6 +2,9 @@ package com.epam.jwd.domain;
 
 import java.util.Arrays;
 
+/**
+ * Status for {@link RecipeProlongationRequest}
+ */
 public enum RecipeRequestStatus {
     PENDING("PENDING"),
     REJECTED("REJECTED"),

@@ -61,7 +61,6 @@ public enum CommandManager {
 
     SEARCH_APPOINTMENT_WINDOW("search_window", new SearchAppointmentWindowCommand(), CommandType.FORWARD, Role.DOCTOR,Role.PATIENT),
     ADD_APPOINTMENT_WINDOW("add_window", new AddAppointmentWindowCommand(), CommandType.REDIRECT, Role.DOCTOR),
-    UPDATE_APPOINTMENT_WINDOW("update_window", new UpdateAppointmentWindowCommand(), CommandType.REDIRECT, Role.DOCTOR),
 
     SEARCH_BANK_ACCOUNT("search_bank_account", new SearchBankAccountCommand(), CommandType.FORWARD, Role.PATIENT, Role.PHARMACIST),
     ADD_BANK_ACCOUNT("add_bank_account", new AddBankAccountCommand(), CommandType.REDIRECT, Role.PATIENT),
@@ -131,7 +130,6 @@ public enum CommandManager {
                 .filter(commandManager1 -> commandManager1.getCommandName().equals(commandName))
                 .findAny()
                 .get();
-        //todo smth with optional, exception??
     }
 
 

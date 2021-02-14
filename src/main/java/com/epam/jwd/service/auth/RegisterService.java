@@ -14,6 +14,12 @@ import com.epam.jwd.util.HashingUtil;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
+/**
+ * Class responsible for registration
+ * Performs hashing the password and storing {@link User} in the database
+ * Checks is the user with similar email already exists in the database
+ * Sends confirmation e-mail to user
+ */
 public class RegisterService {
 
     public static void register(String email, String password, String name, String role, String status) throws DAOException, FactoryException, EntityNotFoundException, ValidationException {

@@ -1,5 +1,8 @@
 package com.epam.jwd.context;
 
+/**
+ * Class contains constants with the names of the JSP pages
+ */
 public enum PageName {
     MAIN_PAGE("/WEB-INF/jsp/MainPage.jsp"),
     LOG_IN_PAGE("/WEB-INF/jsp/LogInPage.jsp"),

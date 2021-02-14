@@ -2,6 +2,9 @@ package com.epam.jwd.domain;
 
 import java.util.Arrays;
 
+/**
+ * Status for {@link Appointment}
+ */
 public enum AppointmentStatus {
     PLANNED("PLANNED"),
     CANCELLED("CANCELLED"),

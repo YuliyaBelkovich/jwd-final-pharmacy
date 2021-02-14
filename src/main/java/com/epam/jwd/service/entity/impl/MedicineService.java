@@ -4,6 +4,7 @@ import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.MedicineCriteria;
 import com.epam.jwd.dao.EntityDao;
 import com.epam.jwd.dao.impl.MedicineDao;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Medicine;
 import com.epam.jwd.factory.EntityFactory;
 import com.epam.jwd.factory.impl.MedicineFactory;
@@ -12,7 +13,10 @@ import com.epam.jwd.service.entity.EntityService;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
-
+/**
+ * Service class for {@link Medicine} class
+ * Performs CRUD operations
+ */
 public class MedicineService implements EntityService<Medicine> {
 
     private static MedicineService medicineService;

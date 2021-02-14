@@ -15,6 +15,10 @@ import com.epam.jwd.service.entity.impl.AppointmentService;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Class responsible for searching {@link Appointment} objects according to given criteria
+ * Returns error message when appointment not found
+ */
 public class SearchAppointmentCommand implements Command {
 
     private static final ResponseContext SEARCH_RESULT = PageName.SEARCH_APPOINTMENT_PAGE::getJspFileName;

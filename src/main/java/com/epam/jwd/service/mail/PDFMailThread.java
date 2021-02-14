@@ -20,7 +20,7 @@ public class PDFMailThread extends Thread {
     private String mailSubject;
     private String mailText;
     private String pdfText;
-    private static final Properties PROPERTIES = new PropertyReaderUtil().loadProperties("src/main/resources/mail.properties");
+    private static final Properties PROPERTIES = new PropertyReaderUtil().loadProperties("C:/Users/Asus/IdeaProjects/jwd-final-pharmacy/src/main/resources/mail.properties");
 
 
     public PDFMailThread(String sendToEmail, String mailSubject, String mailText, String pdfText) {

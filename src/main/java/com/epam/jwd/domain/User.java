@@ -4,6 +4,16 @@ import com.epam.jwd.annotation.StringValidation;
 
 import java.util.Objects;
 
+/**
+ * Represents the user entity of pharmacy
+ * Pharmacist is equivalent to administrator, can manage {@link Medicine} list
+ * Pharmacist can browse {@link Payment}, {@link Order}, {@link Payment} lists, and {@link User} with {@link Role} patient and doctor
+ * Doctor can prescribe {@link Medicine} by creating {@link Recipe} for patients
+ * Doctor manages it's own timeslots by creating {@link AppointmentWindow} objects
+ * Patient can buy {@link Medicine} with automatic creations of {@link Order} and {@link Payment} objects
+ * Patient may have {@link BankAccount}
+ * Patient may make an appointment with doctor
+ */
 public class User implements Entity {
     private int id;
     @StringValidation(pattern = "\\A[a-z0-9!#$%&'*+/=?^_‘{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_‘{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z")

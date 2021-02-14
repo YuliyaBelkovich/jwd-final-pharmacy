@@ -2,6 +2,9 @@ package com.epam.jwd.domain;
 
 import java.util.Arrays;
 
+/**
+ * Status for {@link AppointmentWindow}
+ */
 public enum WindowStatus {
     BUSY("BUSY"),
     FREE("FREE");
@@ -16,7 +19,12 @@ public enum WindowStatus {
     public String getDbName() {
         return dbName;
     }
-
+    /**
+     *
+     * @param baseName - string representation of {@link WindowStatus} object
+     * @return null if baseName is null
+     * @return {@link WindowStatus} if finds appropriate object
+     */
     public static WindowStatus resolveStatusByDBName(String baseName){
         if (baseName == null) {
             return null;

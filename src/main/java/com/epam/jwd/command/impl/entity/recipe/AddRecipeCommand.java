@@ -11,6 +11,10 @@ import com.epam.jwd.service.entity.impl.RecipeService;
 
 import java.time.LocalDate;
 
+/**
+ * Command responsible for adding new {@link com.epam.jwd.domain.Recipe}
+ * Returns error message if mandatory field is missing or if the error occur on the inner levels
+ */
 public class AddRecipeCommand implements Command {
 
     @Override

@@ -4,6 +4,11 @@ import com.epam.jwd.annotation.RoleValidation;
 
 import java.util.Objects;
 
+/**
+ * Representation of prolongation request, created by {@link User} with {@link Role} patient
+ * Sends to {@link User} with {@link Role} doctor with {@link RecipeRequestStatus} pending
+ * Can be confirmed or rejected
+ */
 public class RecipeProlongationRequest implements Entity {
     private int id;
     private int recipeId;

@@ -9,6 +9,9 @@ import com.epam.jwd.service.entity.impl.AppointmentWindowService;
 import java.time.LocalDateTime;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * Util class responsible for removing the outdated {@link AppointmentWindow} objects
+ */
 public class GarbageCleaner extends Thread {
 
     ApplicationContext context;

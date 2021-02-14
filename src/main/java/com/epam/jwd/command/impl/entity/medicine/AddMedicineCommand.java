@@ -9,6 +9,10 @@ import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.exception.ValidationException;
 import com.epam.jwd.service.entity.impl.MedicineService;
 
+/**
+ * Command responsible for adding new {@link com.epam.jwd.domain.Medicine}
+ * Returns error message if mandatory field is missing or if the error occur on the inner levels
+ */
 public class AddMedicineCommand implements Command {
 
     @Override

@@ -5,15 +5,22 @@ import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.domain.Order;
 import com.epam.jwd.domain.OrderStatus;
+import com.epam.jwd.domain.Payment;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.exception.ValidationException;
 import com.epam.jwd.service.entity.impl.OrderService;
 import com.epam.jwd.service.entity.impl.PaymentService;
+import com.epam.jwd.service.mail.MailService;
 
 import java.time.LocalDateTime;
 
+/**
+ * Command responsible for adding new {@link com.epam.jwd.domain.Payment}
+ * Returns error message if mandatory field is missing or if the error occur on the inner levels
+ * Sets {@link OrderStatus} to PAID if the payment object created successfully
+ */
 public class AddPaymentCommand implements Command {
 
     private static final ResponseContext ADD_PAYMENT_SUCCESS = () -> "/pharmacy?command=go_to_payment_success_page";
@@ -29,10 +36,9 @@ public class AddPaymentCommand implements Command {
             return () -> "/pharmacy?command=go_to_add_payment_page&error=Missing+mandatory+field";
         }
         LocalDateTime dateTime = LocalDateTime.now();
-
+        Payment payment;
         try {
-            PaymentService.getInstance().createEntity(0, sum, iban, dateTime);
-            //todo if validation or entity not found = message, if dao or factory - server error page
+            payment = PaymentService.getInstance().createEntity(0, sum, iban, dateTime);
         } catch (FactoryException | DAOException | ValidationException | EntityNotFoundException e) {
             return () -> "/pharmacy?command=go_to_add_payment_page&error=" + e.getMessage().replace(" ", "+");
         }
@@ -43,11 +49,11 @@ public class AddPaymentCommand implements Command {
         } catch (DAOException | ValidationException | EntityNotFoundException e) {
             return () -> "/pharmacy?command=go_to_add_payment_page&error=" + e.getMessage().replace(" ", "+");
         }
-
-        //todo mail
-
-        requestContext.getSession().setAttribute("basket",null);
-        requestContext.getSession().setAttribute("basketPrice",null);
+        if (requestContext.getSession().getAttribute("user_email") != null) {
+            MailService.getInstance().sendPDFEmail((String) requestContext.getSession().getAttribute("user_email"), "Payment invoice", "Payment succeeded! Here's your invoice, please wait till call-center operator will contact you", "Payment ID: " + payment.getId() + "\n" + "IBAN: " + payment.getIBAN() + "\n" + "Sum: " + payment.getSum() + "\n" + "Date: " + payment.getDateTime());
+        }
+        requestContext.getSession().setAttribute("basket", null);
+        requestContext.getSession().setAttribute("basketPrice", null);
         return ADD_PAYMENT_SUCCESS;
     }
 }

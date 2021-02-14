@@ -5,6 +5,7 @@ import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.RecipeProlongationRequestCriteria;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.RecipeProlongationRequest;
 import com.epam.jwd.domain.RecipeRequestStatus;
 import com.epam.jwd.exception.DAOException;
@@ -12,7 +13,10 @@ import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.service.entity.impl.RecipeProlongationRequestService;
 
 import java.util.List;
-
+/**
+ * Class responsible for searching {@link RecipeProlongationRequest} objects according to given criteria
+ * Returns error message when request not found
+ */
 public class SearchRecipeProlongationRequestCommand implements Command {
 
     @Override

@@ -9,6 +9,9 @@ import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.service.entity.impl.MedicineService;
 
+/**
+ * Command responsible from moving {@link Medicine} from {@link Basket}
+ */
 public class RemoveFromBasketCommand implements Command {
     @Override
     public ResponseContext execute(RequestContext requestContext) {

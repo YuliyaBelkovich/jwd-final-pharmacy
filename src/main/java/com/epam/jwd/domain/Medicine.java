@@ -4,6 +4,11 @@ import com.epam.jwd.annotation.StringValidation;
 
 import java.util.Objects;
 
+/**
+ * Class represents medicine entity
+ * Can be ordered by {@link User} with {@link Role} patient
+ * Some of medicines requires {@link Recipe}
+ */
 public class Medicine implements Entity {
 
     private int id;

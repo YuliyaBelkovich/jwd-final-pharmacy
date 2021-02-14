@@ -8,6 +8,10 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+/**
+ * Class initiates the context and starts utility daemon threads
+ * Closes connection pool when the application is killed
+ */
 @WebListener
 public class PharmacyListener implements ServletContextListener {
     @Override
@@ -16,7 +20,6 @@ public class PharmacyListener implements ServletContextListener {
         GarbageCleaner daemon = new GarbageCleaner(PharmacyContext.getInstance());
         daemon.setDaemon(true);
         daemon.start();
-        System.out.println("тест");
     }
 
     @Override

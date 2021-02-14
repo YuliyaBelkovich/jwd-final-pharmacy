@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Wrapper class for {@link HttpServletRequest} class
+ */
 public class CustomRequestContext implements RequestContext {
 
     private final HttpServletRequest request;

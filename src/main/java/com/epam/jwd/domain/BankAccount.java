@@ -5,6 +5,9 @@ import com.epam.jwd.annotation.StringValidation;
 
 import java.util.Objects;
 
+/**
+ * Class represents bank account entity for {@link User} with {@link Role} patient.
+ */
 public class BankAccount  implements Entity{
     private int id;
     @RoleValidation(role="PATIENT")

@@ -10,6 +10,10 @@ import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.exception.ValidationException;
 import com.epam.jwd.service.entity.impl.BankAccountService;
 
+/**
+ * Class responsible for adding new {@link BankAccount}
+ * Returns error message if mandatory field is missing or if the error occur on the inner levels
+ */
 public class AddBankAccountCommand implements Command {
 
     @Override
@@ -31,16 +35,15 @@ public class AddBankAccountCommand implements Command {
             expiryDate = requestContext.getParameter("bank_account_date");
             cvv = Integer.parseInt(requestContext.getParameter("bank_account_cvv"));
         } else {
-           return  () -> url + "&error=Missing+mandatory+field";
+            return () -> url + "&error=Missing+mandatory+field";
         }
 
-        BankAccount bankAccount;
         try {
-            bankAccount = BankAccountService.getInstance().createEntity(0, patientId, iban, cardHolder, expiryDate, cvv);
+            BankAccountService.getInstance().createEntity(0, patientId, iban, cardHolder, expiryDate, cvv);
         } catch (FactoryException | DAOException | ValidationException | EntityNotFoundException e) {
             return () -> url + "&error=" + e.getMessage().replace(" ", "+");
         }
 
-        return ()-> url+"&message=Bank+account+created!";
+        return () -> url + "&message=Bank+account+created!";
     }
 }

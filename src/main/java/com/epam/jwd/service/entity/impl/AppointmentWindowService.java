@@ -4,6 +4,7 @@ import com.epam.jwd.criteria.AppointmentWindowCriteria;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.dao.EntityDao;
 import com.epam.jwd.dao.impl.AppointmentWindowDao;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.WindowStatus;
 import com.epam.jwd.factory.EntityFactory;
@@ -14,7 +15,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
-
+/**
+ * Service class for {@link AppointmentWindow} class
+ * Performs CRUD operations
+ */
 public class AppointmentWindowService implements EntityService<AppointmentWindow> {
 
     private static AppointmentWindowService service = new AppointmentWindowService();

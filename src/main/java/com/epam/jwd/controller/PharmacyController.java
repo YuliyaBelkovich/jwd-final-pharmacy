@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet class responsible for managing the coming requests and executing commands
+ */
 @WebServlet(name = "pharmacy", urlPatterns = "/pharmacy")
 public class PharmacyController extends HttpServlet {
 

@@ -6,6 +6,9 @@ import com.epam.jwd.exception.DAOException;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * Cache class for quick access to data without the need of connecting to database
+ */
 public class PharmacyCache {
 
     private static PharmacyCache pharmacyCache = new PharmacyCache();

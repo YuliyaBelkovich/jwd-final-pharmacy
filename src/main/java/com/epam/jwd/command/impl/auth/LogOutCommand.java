@@ -4,6 +4,10 @@ import com.epam.jwd.command.Command;
 import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
 
+/**
+ * Command responsible for logging out
+ * Sets all session attributes describing user to default
+ */
 public class LogOutCommand implements Command {
     private static final ResponseContext LOG_OUT = () -> "/pharmacy?command=start";
 

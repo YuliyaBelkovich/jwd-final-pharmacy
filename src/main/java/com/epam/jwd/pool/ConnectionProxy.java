@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * Wrapper class for {@link Connection}
+ * Has the override method close() which returns connection to the pool instead of really closing it
+ * For real closing uses method realClose();
+ */
 public class ConnectionProxy implements Connection {
 
     private Connection connection;

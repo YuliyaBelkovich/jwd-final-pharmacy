@@ -6,13 +6,17 @@ import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.context.PageName;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.MedicineCriteria;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Medicine;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.service.entity.impl.MedicineService;
 
 import java.util.List;
-
+/**
+ * Class responsible for searching {@link Medicine} objects according to given criteria
+ * Returns error message when medicine not found
+ */
 public class SearchMedicineCommand implements Command {
 
     private static final ResponseContext SEARCH_RESULT = PageName.SEARCH_MEDICINE_PAGE::getJspFileName;

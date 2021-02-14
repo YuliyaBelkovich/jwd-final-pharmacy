@@ -7,6 +7,10 @@ import com.epam.jwd.pool.ConnectionPool;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * Implementation of {@link ApplicationContext} class
+ * Contains custom properties for this app
+ */
 public class PharmacyContext implements ApplicationContext {
 
     private static PharmacyContext pharmacyContext = new PharmacyContext();

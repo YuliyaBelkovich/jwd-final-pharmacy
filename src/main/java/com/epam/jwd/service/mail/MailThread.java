@@ -42,7 +42,6 @@ public class MailThread extends Thread {
 
         } catch (MessagingException e) {
             System.err.print("Message generation error: " + e);
-// in log file
         }
     }
 

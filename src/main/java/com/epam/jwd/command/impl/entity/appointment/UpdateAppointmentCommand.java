@@ -13,6 +13,10 @@ import com.epam.jwd.service.entity.impl.AppointmentService;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class responsible for updating the {@link Appointment} object
+ * Requires all fields to update
+ */
 public class UpdateAppointmentCommand implements Command {
     @Override
     public ResponseContext execute(RequestContext requestContext) {

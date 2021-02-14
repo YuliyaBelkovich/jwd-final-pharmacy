@@ -5,6 +5,10 @@ import com.epam.jwd.annotation.StringValidation;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Representation of payment entity
+ * Created in order to set {@link OrderStatus} PAID
+ */
 public class Payment implements Entity {
 
     private int id;

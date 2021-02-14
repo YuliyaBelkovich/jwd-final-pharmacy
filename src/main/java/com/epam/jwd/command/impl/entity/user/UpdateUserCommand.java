@@ -3,6 +3,7 @@ package com.epam.jwd.command.impl.entity.user;
 import com.epam.jwd.command.Command;
 import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.User;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
@@ -11,7 +12,10 @@ import com.epam.jwd.exception.ValidationException;
 import com.epam.jwd.factory.impl.UserFactory;
 import com.epam.jwd.service.entity.impl.UserService;
 import com.epam.jwd.service.mail.MailService;
-
+/**
+ * Class responsible for updating the {@link User} object
+ * Requires all fields to update
+ */
 public class UpdateUserCommand implements Command {
     @Override
     public ResponseContext execute(RequestContext requestContext) {

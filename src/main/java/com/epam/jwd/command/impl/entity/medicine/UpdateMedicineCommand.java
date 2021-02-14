@@ -3,6 +3,7 @@ package com.epam.jwd.command.impl.entity.medicine;
 import com.epam.jwd.command.Command;
 import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Medicine;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
@@ -10,7 +11,10 @@ import com.epam.jwd.exception.FactoryException;
 import com.epam.jwd.exception.ValidationException;
 import com.epam.jwd.factory.impl.MedicineFactory;
 import com.epam.jwd.service.entity.impl.MedicineService;
-
+/**
+ * Class responsible for updating the {@link Medicine} object
+ * Requires all fields to update
+ */
 public class UpdateMedicineCommand implements Command {
 
     @Override

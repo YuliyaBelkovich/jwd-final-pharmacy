@@ -4,6 +4,7 @@ import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.RecipeCriteria;
 import com.epam.jwd.dao.EntityDao;
 import com.epam.jwd.dao.impl.RecipeDao;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Recipe;
 import com.epam.jwd.factory.EntityFactory;
 import com.epam.jwd.factory.impl.RecipeFactory;
@@ -13,7 +14,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
-
+/**
+ * Service class for {@link Recipe} class
+ * Performs CRUD operations
+ */
 public class RecipeService  implements EntityService<Recipe> {
 
     private static RecipeService recipeService;

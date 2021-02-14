@@ -4,6 +4,7 @@ import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.OrderCriteria;
 import com.epam.jwd.dao.EntityDao;
 import com.epam.jwd.dao.impl.OrderDao;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Order;
 import com.epam.jwd.domain.OrderStatus;
 import com.epam.jwd.exception.DAOException;
@@ -19,7 +20,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
-
+/**
+ * Service class for {@link Order} class
+ * Performs CRUD operations
+ */
 public class OrderService implements EntityService<Order> {
 
     private static OrderService orderService;

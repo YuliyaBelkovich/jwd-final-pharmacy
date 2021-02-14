@@ -11,6 +11,10 @@ import com.epam.jwd.service.entity.impl.AppointmentWindowService;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class responsible for adding new {@link com.epam.jwd.domain.AppointmentWindow}
+ *
+ */
 public class AddAppointmentWindowCommand implements Command {
 
     @Override

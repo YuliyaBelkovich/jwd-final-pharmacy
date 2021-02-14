@@ -1,11 +1,17 @@
 package com.epam.jwd.pool;
 
 import com.epam.jwd.domain.ApplicationProperties;
+import com.epam.jwd.exception.DAOException;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.concurrent.ArrayBlockingQueue;
 
+/**
+ * Class responsible for storing and offering connections to the database
+ * Stores {@link ConnectionProxy}
+ * Creates when the server is started
+ */
 public class ConnectionPool {
 
     private static ConnectionPool connectionPool;
@@ -55,12 +61,18 @@ public class ConnectionPool {
         availableConnections.clear();
     }
 
-    public ConnectionProxy retrieveConnection() {
+    public ConnectionProxy retrieveConnection() throws DAOException {
         ConnectionProxy connection = null;
         try {
             connection = availableConnections.take();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            if(availableConnections.size() < properties.getMaxConnections()){
+                try {
+                   connection  = new ConnectionProxy(DriverManager.getConnection(properties.getUrl(), properties.getUser(), properties.getPassword()));
+                } catch (SQLException exception) {
+                    throw new DAOException("No connections available.");
+                }
+            }
         }
         return connection;
     }

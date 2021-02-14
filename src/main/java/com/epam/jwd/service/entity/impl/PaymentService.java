@@ -4,6 +4,7 @@ import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.PaymentCriteria;
 import com.epam.jwd.dao.EntityDao;
 import com.epam.jwd.dao.impl.PaymentDao;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Payment;
 import com.epam.jwd.factory.EntityFactory;
 import com.epam.jwd.factory.impl.PaymentFactory;
@@ -13,7 +14,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
-
+/**
+ * Service class for {@link Payment} class
+ * Performs CRUD operations
+ */
 public class PaymentService implements EntityService<Payment> {
 
     private static PaymentService service = new PaymentService();

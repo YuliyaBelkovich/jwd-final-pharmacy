@@ -6,6 +6,7 @@ import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.PaymentCriteria;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Payment;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
@@ -13,7 +14,10 @@ import com.epam.jwd.service.entity.impl.PaymentService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+/**
+ * Class responsible for searching {@link Payment} objects according to given criteria
+ * Returns error message when payment not found
+ */
 public class SearchPaymentCommand implements Command {
     private static final ResponseContext SEARCH_RESULT = PageName.SEARCH_PAYMENT_PAGE::getJspFileName;
 

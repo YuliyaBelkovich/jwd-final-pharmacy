@@ -3,6 +3,10 @@ package com.epam.jwd.domain;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Non-entity class for representing basket entity for each {@link User} with {@link Role} patient, or for GUEST user
+ * Guest doesn't has it's own class, but has a basket
+ */
 public class Basket {
     private static Basket instance;
     private Map<Medicine, Integer> basketMedicine;

@@ -3,6 +3,9 @@ package com.epam.jwd.util;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Class responsible for managing the resource bundle object and changing the language on the JSP pages
+ */
 public class LanguageManager {
     private static LanguageManager instance = new LanguageManager();
     private  Locale current;

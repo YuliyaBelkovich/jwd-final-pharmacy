@@ -8,6 +8,10 @@ import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.service.entity.EntityService;
 
+/**
+ * Class responsible for deleting Entity
+ * @param <T>
+ */
 public class DeleteEntityCommand<T extends Entity> implements Command {
     private String entityName;
     private EntityService<T> service;

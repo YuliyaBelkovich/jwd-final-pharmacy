@@ -2,6 +2,9 @@ package com.epam.jwd.domain;
 
 import java.util.Arrays;
 
+/**
+ * Status for {@link User}
+ */
 public enum UserStatus {
 
     ACTIVE("ACTIVE"),
@@ -17,7 +20,12 @@ public enum UserStatus {
     public String getDbName() {
         return dbName;
     }
-
+    /**
+     *
+     * @param baseName - string representation of {@link UserStatus} object
+     * @return null if baseName is null
+     * @return {@link UserStatus} if finds appropriate object
+     */
     public static UserStatus resolveStatusByDBName(String baseName)  {
         if (baseName == null) {
             return null;

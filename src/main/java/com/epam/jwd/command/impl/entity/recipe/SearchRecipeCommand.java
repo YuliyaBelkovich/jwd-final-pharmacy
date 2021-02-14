@@ -6,6 +6,7 @@ import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.criteria.Criteria;
 import com.epam.jwd.criteria.RecipeCriteria;
+import com.epam.jwd.domain.Appointment;
 import com.epam.jwd.domain.Recipe;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.EntityNotFoundException;
@@ -13,7 +14,10 @@ import com.epam.jwd.service.entity.impl.RecipeService;
 
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * Class responsible for searching {@link Recipe} objects according to given criteria
+ * Returns error message when appointment not found
+ */
 public class SearchRecipeCommand implements Command {
     private static final ResponseContext SEARCH_RESULT = PageName.SEARCH_RECIPE_PAGE::getJspFileName;
 
