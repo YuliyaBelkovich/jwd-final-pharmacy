@@ -1,6 +1,7 @@
 package com.epam.jwd.dao.impl;
 
 import com.epam.jwd.criteria.Criteria;
+import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.Entity;
 import com.epam.jwd.domain.RecipeProlongationRequest;
 import com.epam.jwd.exception.DAOException;
@@ -12,16 +13,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Implementation of class {@link AbstractDao} parametrized with {@link RecipeProlongationRequest} class
+ */
 public class RecipeProlongationRequestDao extends AbstractDao<RecipeProlongationRequest> {
 
     private static RecipeProlongationRequestDao instance = new RecipeProlongationRequestDao();
 
     private static final String SELECT_ALL = "SELECT * FROM recipe_prolongation_requests";
     private static final String ADD = "INSERT INTO recipe_prolongation_requests (recipe_id,request_status,doctor_id) VALUES (?,?,?)";
-    private static final String UPDATE = "UPDATE recipe_prolongation_requests SET recipe_id = ? request_status = ?, doctor_id = ? WHERE id = ?";
+    private static final String UPDATE = "UPDATE recipe_prolongation_requests SET recipe_id = ?, request_status = ?, doctor_id = ? WHERE id = ?";
     private static final String DELETE = "DELETE FROM recipe_prolongation_requests WHERE id = ?";
-    private static final String SEARCH_BY_ID = "SELECT * WHERE id = ?";
+    private static final String SEARCH_BY_ID = "SELECT * FROM recipe_prolongation_requests WHERE id = ?";
 
 private RecipeProlongationRequestDao(){}
 

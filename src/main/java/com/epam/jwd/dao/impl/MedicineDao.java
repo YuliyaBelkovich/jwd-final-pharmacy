@@ -1,5 +1,6 @@
 package com.epam.jwd.dao.impl;
 
+import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.Entity;
 import com.epam.jwd.domain.Medicine;
 import com.epam.jwd.exception.DAOException;
@@ -12,7 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Implementation of class {@link AbstractDao} parametrized with {@link Medicine} class
+ */
 public class MedicineDao extends AbstractDao<Medicine> {
 
     private static MedicineDao instance = new MedicineDao();

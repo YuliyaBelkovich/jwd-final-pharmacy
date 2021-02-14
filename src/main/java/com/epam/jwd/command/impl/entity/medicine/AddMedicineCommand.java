@@ -30,16 +30,16 @@ public class AddMedicineCommand implements Command {
             dose = Double.parseDouble(requestContext.getParameter("medicine_dose"));
             price = Double.parseDouble(requestContext.getParameter("medicine_price"));
         } else {
-            return () -> "/pharmacy?command=go_to_add_medicine_page&error=Mising+mandatory+field";
+            return () -> "/pharmacy?command=go_to_user_main_page&error=Mising+mandatory+field";
         }
 
         try {
             MedicineService.getInstance().createEntity(0, nameMedicine, dose, recipe_requirement, information, price);
         } catch (FactoryException | DAOException | ValidationException | EntityNotFoundException e) {
-            return () -> "/pharmacy?command=go_to_add_medicine_page&error="+e.getMessage().replace(" ","+");
+            return () -> "/pharmacy?command=go_to_user_main_page&error="+e.getMessage().replace(" ","+");
         }
 
         requestContext.getSession().setAttribute("Message", "Medicine created!\n");
-        return ()-> "/pharmacy?command=go_to_add_medicine_page&message=Medicine+created";
+        return ()-> "/pharmacy?command=go_to_user_main_page&message=Medicine+created";
     }
 }

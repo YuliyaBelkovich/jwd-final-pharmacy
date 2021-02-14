@@ -78,7 +78,7 @@
 
                 <%--            DISPLAY SEARCH RESULT--%>
 
-                <div class="col-md-4">
+                <div class="col-md-7">
                     <div>
                         <ul class="list-group">
                             <c:if test="${sessionScope.user_role=='DOCTOR' or sessionScope.user_role=='PHARMACIST' }">

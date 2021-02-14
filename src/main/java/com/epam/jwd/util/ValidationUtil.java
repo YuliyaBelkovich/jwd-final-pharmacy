@@ -105,7 +105,7 @@ public class ValidationUtil {
             } catch (IllegalAccessException e) {
                 throw new ValidationException("Unable to validate field " + field.getName() + ", access denied ");
             }
-            if (value.length() > minLength && value.length() < maxLength) {
+            if (value.length() >= minLength && value.length() <= maxLength) {
                 Pattern p = Pattern.compile(pattern);
                 Matcher m = p.matcher(value);
                 if (m.matches()) {

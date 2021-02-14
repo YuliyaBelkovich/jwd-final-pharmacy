@@ -94,7 +94,6 @@
                 <%--                DISPLAY ACTION BUTTONS--%>
 
                 <div class="col-md-2">
-                        <%--                    APPOINTMENTS AND RECIPES!!!!!!!!--%>
                     <c:if
                             test="${sessionScope.user_role == 'PHARMACIST'}">
                         <button type="button" onclick="openUpdate(${doctor.id})" class="btn btn-warning"><fmt:message key="user.button.update" bundle="${rb}"/></button>
@@ -105,18 +104,17 @@
                 <div class="col-md-3">
                     <small>
                         <div class="d-none" id="updateStatusForm${doctor.id}">
-                            <form action="${pageContext.request.contextPath}/pharmacy" method="POST">
-                                <input type="hidden" name="command" value="update_user">
-                                <input type="hidden" name="user_id" value="${doctor.id}">
-                                <input type="hidden" name="user_name" value="${doctor.name}">
-                                <input type="hidden" name="user_email" value="${doctor.email}">
-                                <input type="hidden" name="user_password" value="${doctor.password}">
+                            <form action="${pageContext.request.contextPath}/pharmacy" method="POST" class="needs-validation" novalidate>
+                                <input type="hidden" name="command" value="update_user" required>
+                                <input type="hidden" name="user_id" value="${doctor.id}" required>
+                                <input type="hidden" name="user_name" value="${doctor.name}" required>
+                                <input type="hidden" name="user_email" value="${doctor.email}" required>
                                 <input type="hidden" name="user_role" value="DOCTOR">
                                 <div class="form-group">
                                     <label for="update_status_user"><fmt:message key="user.status" bundle="${rb}"/></label>
                                     <input type="search" name="user_status" class="form-control" list="updateStatus"
                                            id="update_status_user"
-                                           placeholder="<fmt:message key="user.status.placeholder" bundle="${rb}"/>">
+                                           placeholder="<fmt:message key="user.status.placeholder" bundle="${rb}"/>" required>
                                 </div>
                                 <datalist id="updateStatus">
                                     <option value="ACTIVE" label="ACTIVE">
@@ -144,6 +142,28 @@
     function closeUpdate(id) {
         document.getElementById("updateStatusForm"+id).classList.replace("d-block", "d-none");
     }
+</script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 </script>
 </body>
 </html>

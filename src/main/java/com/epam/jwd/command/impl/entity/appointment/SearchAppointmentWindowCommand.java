@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class SearchAppointmentWindowCommand implements Command {
-  //  private static final ResponseContext SEARCH_RESULT = PageName.SEARCH_APPOINTMENT_WINDOW_PAGE::getJspFileName;
 
     @Override
     public ResponseContext execute(RequestContext requestContext) {

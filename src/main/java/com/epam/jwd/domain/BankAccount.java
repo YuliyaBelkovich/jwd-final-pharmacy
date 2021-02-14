@@ -3,15 +3,17 @@ package com.epam.jwd.domain;
 import com.epam.jwd.annotation.RoleValidation;
 import com.epam.jwd.annotation.StringValidation;
 
+import java.util.Objects;
+
 public class BankAccount  implements Entity{
     private int id;
     @RoleValidation(role="PATIENT")
     private int patientId;
-    @StringValidation(pattern ="^([A-Z]{2}[ '+'\\'+'-]?[0-9]{2})(?=(?:[ '+'\\'+'-]?[A-Z0-9]){9,30}$)((?:[ '+'\\'+'-]?[A-Z0-9]{3,5}){2,7})([ '+'\\'+'-]?[A-Z0-9]{1,3})?$",maxLength = 20,minLength = 20)
+    @StringValidation(pattern ="\\d{16}",maxLength = 16,minLength = 16)
     private String IBAN;
     @StringValidation(pattern = "^((?:[A-Za-z]+ ?){1,3})$")
     private String cardHolder;
-    @StringValidation(pattern = "(?:0[1-9]|1[0-2])/[0-9]{2}",minLength = 5)
+    @StringValidation(pattern = "(?:0[1-9]|1[0-2])/[0-9]{2}", minLength = 5)
     private String expirationDate;
     private int cvv;
 
@@ -63,5 +65,18 @@ public class BankAccount  implements Entity{
                 ", expirationDate='" + expirationDate + '\'' +
                 ", cvv=" + cvv +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BankAccount that = (BankAccount) o;
+        return id == that.id && patientId == that.patientId && cvv == that.cvv && IBAN.equals(that.IBAN) && cardHolder.equals(that.cardHolder) && expirationDate.equals(that.expirationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, patientId, IBAN, cardHolder, expirationDate, cvv);
     }
 }

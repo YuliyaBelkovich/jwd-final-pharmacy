@@ -38,11 +38,9 @@ public class AddBankAccountCommand implements Command {
         try {
             bankAccount = BankAccountService.getInstance().createEntity(0, patientId, iban, cardHolder, expiryDate, cvv);
         } catch (FactoryException | DAOException | ValidationException | EntityNotFoundException e) {
-            return () -> url + "&" + e.getMessage().replace(" ", "+");
+            return () -> url + "&error=" + e.getMessage().replace(" ", "+");
         }
 
-        requestContext.getSession().setAttribute("Error", "");
-        requestContext.getSession().setAttribute("Message", "Bank account created!\n" + bankAccount.toString());
         return ()-> url+"&message=Bank+account+created!";
     }
 }

@@ -1,5 +1,6 @@
 package com.epam.jwd.dao.impl;
 
+import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.Entity;
 import com.epam.jwd.domain.Recipe;
 import com.epam.jwd.exception.DAOException;
@@ -16,7 +17,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Implementation of class {@link AbstractDao} parametrized with {@link Recipe} class
+ */
 public class RecipeDao extends AbstractDao<Recipe> {
 
     private static RecipeDao instance = new RecipeDao();

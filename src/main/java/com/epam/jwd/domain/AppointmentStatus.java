@@ -17,6 +17,12 @@ public enum AppointmentStatus {
         return dbName;
     }
 
+    /**
+     *
+     * @param baseName - string representation of {@link AppointmentStatus} object
+     * @return null if baseName is null
+     * @return {@link AppointmentStatus} if finds appropriate object
+     */
     public static AppointmentStatus resolveStatusByDBName(String baseName) {
         if (baseName == null) {
            return null;

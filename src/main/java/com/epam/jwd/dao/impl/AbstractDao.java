@@ -12,6 +12,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Abstract class with database access functions
+ *
+ * @param <T>
+ */
 public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
 
     private static Logger logger = Logger.getLogger(AbstractDao.class);
@@ -40,8 +45,22 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
 
     public abstract List<T> parseResultSet(ResultSet rs) throws DAOException;
 
+    /**
+     * Method fills in the prepared statement of operations ADD or UPDATE
+     * @param entity - <T> object to update or add to database
+     * @param operation -ADD or UPDATE
+     * @throws DAOException - when transaction failed due to the SQL error
+     */
     public abstract void executeOperation(T entity, String operation) throws DAOException;
 
+    /**
+     * Method finds entity <T> by certain criteria, <T> must implement interface Entity
+     *
+     * @param criteria
+     * @return List<T>
+     * @throws DAOException            - when transaction failed due to the SQL errors
+     * @throws EntityNotFoundException - when entity with given criteria is absent
+     */
     public List<T> findByCriteria(Criteria<Entity> criteria) throws DAOException, EntityNotFoundException {
         getConnection();
         List<T> searchResult;
@@ -61,6 +80,14 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
 
     }
 
+    /**
+     * Method finds entity by it's id
+     *
+     * @param id
+     * @return object T - entity
+     * @throws DAOException            - when transaction failed due to the SQL errors
+     * @throws EntityNotFoundException - when entity with given criteria is absent
+     */
     public T findEntityById(int id) throws DAOException, EntityNotFoundException {
         getConnection();
         List<T> searchResult;
@@ -73,13 +100,18 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
             throw new DAOException("Database issues. Please, try later.");
         }
         closeConnection();
-        if (searchResult != null) {
+        if (!searchResult.isEmpty()) {
             return searchResult.get(0);
         } else {
             throw new EntityNotFoundException();
         }
     }
 
+    /**
+     * Deletes entity from database, returns void
+     * @param entity
+     * @throws DAOException - when transaction failed due to the SQL errors
+     */
     public void delete(T entity) throws DAOException {
         getConnection();
         try (PreparedStatement statement = connection.prepareStatement(getDeleteQuery())) {
@@ -92,18 +124,33 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
         closeConnection();
     }
 
+    /**
+     * Adds entity to database
+     * @param entity
+     * @throws DAOException - when transaction failed due to the SQL errors
+     */
     public void add(T entity) throws DAOException {
         getConnection();
         executeOperation(entity, getAddQuery());
         closeConnection();
     }
 
+    /**
+     * Updates all the fields of entity in database
+     * @param entity
+     * @throws DAOException - when transaction failed due to the SQL errors
+     */
     public void update(T entity) throws DAOException {
         getConnection();
         executeOperation(entity, getUpdateQuery());
         closeConnection();
     }
 
+    /**
+     * Finds all present entities in database
+     * @return
+     * @throws DAOException
+     */
     public List<T> getAll() throws DAOException {
         getConnection();
         List<T> list;
@@ -119,6 +166,10 @@ public abstract class AbstractDao<T extends Entity> implements EntityDao<T> {
         return list;
     }
 
+    /**
+     * Returns {@link Connection} to the connection pool
+     * @throws DAOException
+     */
     public void closeConnection() throws DAOException {
         try {
             connection.close();

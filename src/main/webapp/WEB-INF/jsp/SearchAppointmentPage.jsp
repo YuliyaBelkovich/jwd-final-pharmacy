@@ -83,10 +83,8 @@
                         <ul class="list-group">
                             <small>
                                 <label for="result_id">id</label>
-                                <a href="/pharmacy?command=go_to_appointment_page&appointment_id=${appointment.id}">
                                     <li class="list-group-item list-group-item-light" id="result_id"><c:out
                                             value="${appointment.id}"/></li>
-                                </a>
                             </small>
                             <label for="result_patient"><fmt:message key="appointment.patient" bundle="${rb}"/></label>
                             <a href="/pharmacy?command=go_to_patient_page&patient_id=${appointment.patientId}">
@@ -126,6 +124,7 @@
                 <div class="col-md-3">
                     <div class="d-none" id="updateForm${appointment.id}">
                         <form action="${pageContext.request.contextPath}/pharmacy" method="POST">
+                            <input type="hidden" name="command" value="update_appointment">
                             <input type="hidden" name="appointment_id" value="${appointment.id}">
                             <input type="hidden" name="appointment_doctor" value="${appointment.doctorId}">
                             <input type="hidden" name="appointment_patient" value="${appointment.patientId}">
@@ -136,7 +135,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="update_status"><fmt:message key="appointment.status" bundle="${rb}"/></label>
-                                <input type="search" name="appointment_date" list="statusList" class="form-control" id="update_status"
+                                <input type="search" name="appointment_status" list="statusList" class="form-control" id="update_status"
                                        placeholder="<fmt:message key="appointment.status.placeholder" bundle="${rb}"/>">
                             </div>
                             <p>   </p>

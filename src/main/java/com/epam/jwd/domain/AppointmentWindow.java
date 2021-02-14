@@ -3,11 +3,18 @@ package com.epam.jwd.domain;
 import com.epam.jwd.annotation.RoleValidation;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-public class AppointmentWindow  implements Entity{
+/**
+ * id {@link int}
+ * doctorId {@link int}
+ * dateTime {@link LocalDateTime} - date and time available for doctor
+ * status {@link WindowStatus}
+ */
+public class AppointmentWindow implements Entity {
 
     private int id;
-    @RoleValidation(role="DOCTOR")
+    @RoleValidation(role = "DOCTOR")
     private int doctorId;
     private LocalDateTime dateTime;
     private WindowStatus status;
@@ -60,5 +67,18 @@ public class AppointmentWindow  implements Entity{
                 ", dateTime=" + dateTime +
                 ", status=" + status +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppointmentWindow window = (AppointmentWindow) o;
+        return id == window.id && doctorId == window.doctorId && dateTime.equals(window.dateTime) && status == window.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, doctorId, dateTime, status);
     }
 }

@@ -12,30 +12,26 @@ import com.epam.jwd.service.entity.impl.AppointmentWindowService;
 import java.time.LocalDateTime;
 
 public class AddAppointmentWindowCommand implements Command {
-    private static final ResponseContext ADD_WINDOW_RESULT = () -> "/pharmacy?command=go_to_add_appointment_window_page";
 
     @Override
     public ResponseContext execute(RequestContext requestContext) {
         int doctorId;
         LocalDateTime dateTime;
+        String url = (String) requestContext.getSession().getAttribute("previousPage");
 
         if (requestContext.hasParameter("window_doctor") && requestContext.hasParameter("window_date")) {
             doctorId = Integer.parseInt(requestContext.getParameter("window_doctor"));
             dateTime = LocalDateTime.parse(requestContext.getParameter("window_date"));
         } else {
-            requestContext.getSession().setAttribute("Error", "Missing mandatory field");
-            return ADD_WINDOW_RESULT;
+            return () -> url+"&error=Missing+mandatory+field";
         }
 
         try {
             AppointmentWindowService.getInstance().createEntity(0, doctorId, dateTime, "FREE");
         } catch (FactoryException | DAOException | ValidationException | EntityNotFoundException e) {
-            requestContext.setAttribute("Error", e.getMessage());
-            return ADD_WINDOW_RESULT;
+            return () -> url+"&"+e.getMessage().replace(" ","+");
         }
 
-        requestContext.getSession().setAttribute("Error", "");
-        requestContext.getSession().setAttribute("Message", "Appointment window created!\n");
-        return ADD_WINDOW_RESULT;
+        return () -> url+"&message=Timeslot+created!";
     }
 }

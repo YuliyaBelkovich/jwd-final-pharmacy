@@ -13,6 +13,7 @@ import com.epam.jwd.exception.EntityNotFoundException;
 import com.epam.jwd.service.entity.impl.MedicineService;
 import com.epam.jwd.service.entity.impl.RecipeService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class AddToBasketCommand implements Command {
@@ -28,7 +29,7 @@ public class AddToBasketCommand implements Command {
             id = Integer.parseInt(requestContext.getParameter("medicine_id"));
             amount = Integer.parseInt(requestContext.getParameter("amount"));
             if (requestContext.getSession().getAttribute("user_id") != null) {
-                userId = Integer.parseInt((String) requestContext.getSession().getAttribute("user_id"));
+                userId = (Integer) requestContext.getSession().getAttribute("user_id");
             }
         }
 
@@ -37,15 +38,17 @@ public class AddToBasketCommand implements Command {
             medicine = MedicineService.getInstance().findById(id);
             if (medicine.isRecipeRequirement()) {
                 if (requestContext.getSession().getAttribute("user_role").equals("GUEST")) {
-                    requestContext.getSession().setAttribute("Error", "This medicine requires recipe. Please contact your doctor to get an appropriate recipe");
                     return () -> url + "&error=This+medicine+requires+recipe.+Please+contact+your+doctor+to+get+an+appropriate+recipe";
                 }
                 Criteria<Recipe> criteria = RecipeCriteria.builder().setPatientId(userId).setMedicineId(id).build();
                 List<Recipe> recipeList = RecipeService.getInstance().findByCriteria(criteria);
                 if (!recipeList.isEmpty()) {
-                    amount = (int) recipeList.get(0).getDose();
+                    if(recipeList.get(0).getDate().plusDays(recipeList.get(0).getDuration()).isAfter(LocalDate.now())) {
+                        amount = (int) recipeList.get(0).getDose();
+                    } else {
+                        return ()-> url+"&error=Your+recipe+expired";
+                    }
                 } else {
-                    requestContext.getSession().setAttribute("Error", "This medicine requires recipe. Please contact your doctor to get an appropriate recipe");
                     return () -> url + "&error=This+medicine+requires+recipe.+Please+contact+your+doctor+to+get+an+appropriate+recipe";
 
                 }
@@ -55,7 +58,6 @@ public class AddToBasketCommand implements Command {
             requestContext.getSession().setAttribute("basket", basket);
             requestContext.getSession().setAttribute("basketPrice", basket.getTotalPrice());
         } catch (EntityNotFoundException | DAOException e) {
-            requestContext.getSession().setAttribute("Error", "Error accused while adding to basket");
             return () -> url + "&error=Error+accused+while+adding+to+basket";
         }
         return () -> url + "&message=Medicine+added!&error=";

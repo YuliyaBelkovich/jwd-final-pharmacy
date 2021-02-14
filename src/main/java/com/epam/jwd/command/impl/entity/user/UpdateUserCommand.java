@@ -24,7 +24,7 @@ public class UpdateUserCommand implements Command {
 
         if (requestContext.hasParameter("user_id") && requestContext.hasParameter("user_name")
                 && requestContext.hasParameter("user_email") && requestContext.hasParameter("user_status")
-                && requestContext.hasParameter("user_role") && requestContext.hasParameter("user_password")) {
+                && requestContext.hasParameter("user_role")) {
             id = Integer.parseInt(requestContext.getParameter("user_id"));
             name = requestContext.getParameter("user_name");
             email = requestContext.getParameter("user_email");

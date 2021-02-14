@@ -74,7 +74,7 @@
                     <label for="result_price"><fmt:message key="order.total" bundle="${rb}"/></label>
                     <li class="list-group-item list-group-item-primary" id="result_price"><c:out
                             value="${order.price}"/></li>
-                    <label for="result_patient"><fmt:message key="order.patient" bundle="${rb}"/>/label>
+                    <label for="result_patient"><fmt:message key="order.patient" bundle="${rb}"/></label>
                     <a href="/pharmacy?command=go_to_patient_page&patient_id=${order.patientId}">
                     <li class="list-group-item list-group-item-primary" id="result_patient"><c:out
                             value="${order.patientId}"/></li>

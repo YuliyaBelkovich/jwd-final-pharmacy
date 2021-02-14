@@ -6,6 +6,14 @@ import com.epam.jwd.annotation.StringValidation;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ *  id {@link int}
+ *  patientId {@link int}
+ *  doctorId {@link int}
+ *  dateTime {@link LocalDateTime}
+ *  info {@link String} -information about the placed appointment
+ *  appointmentStatus {@link AppointmentStatus}
+ */
 public class Appointment implements Entity {
     private int id;
     @RoleValidation(role="PATIENT")

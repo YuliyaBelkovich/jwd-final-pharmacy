@@ -13,7 +13,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Implementation of class {@link AbstractDao} parametrized with {@link AppointmentWindow} class
+ */
 public class AppointmentWindowDao extends AbstractDao<AppointmentWindow> {
 
     private static AppointmentWindowDao dao = new AppointmentWindowDao();

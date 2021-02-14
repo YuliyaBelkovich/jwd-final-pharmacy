@@ -40,8 +40,8 @@
         <div>
             <c:forEach items="${requestScope.BankAccount}" var="bankAccount">
                 <div>
-                    <p class="text-primary"><c:out value="${bankAccount.iban}"/>
-                        <a href="/pharmacy?command=add_payment&payment_sum=${sessionScope.order.price}&payment_iban=${bankAccount.iban}">
+                    <p class="text-primary"><c:out value="${bankAccount.IBAN}"/>
+                        <a href="/pharmacy?command=add_payment&payment_sum=${sessionScope.order.price}&payment_iban=${bankAccount.IBAN}">
                             <button type="button" class="btn btn-warning"><fmt:message key="payment.button.submit" bundle="${rb}"/></button>
                         </a>
                     </p>
@@ -64,15 +64,15 @@
             </div>
             <div class="form-group">
                 <label for="card_holder"><fmt:message key="payment.pay.holder" bundle="${rb}"/></label>
-                <input type="text" name="payment_card_holder" class="form-control" id="card_holder">
+                <input type="text" name="payment_card_holder" pattern="^((?:[A-Za-z]+ ?){1,3})$" class="form-control" id="card_holder">
             </div>
             <div class="form-group">
                 <label for="expiry"><fmt:message key="payment.pay.expiry" bundle="${rb}"/></label>
-                <input type="text" name="payment_expiry" class="form-control" id="expiry">
+                <input type="text" name="payment_expiry" pattern="(?:0[1-9]|1[0-2])/[0-9]{2}" class="form-control" id="expiry">
             </div>
             <div class="form-group">
                 <label for="cvv"><fmt:message key="payment.pay.cvv" bundle="${rb}"/></label>
-                <input type="text" name="payment_cvv" class="form-control" id="cvv">
+                <input type="text" name="payment_cvv" pattern="\d{3}" class="form-control" id="cvv">
             </div>
             <button type="submit" class="btn btn-success"><fmt:message key="payment.button.submit" bundle="${rb}"/></button>
         </form>

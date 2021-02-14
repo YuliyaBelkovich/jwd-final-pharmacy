@@ -48,8 +48,7 @@ public class SearchBankAccountCommand implements Command {
         try {
             bankAccounts = BankAccountService.getInstance().findByCriteria(criteria);
         } catch (EntityNotFoundException | DAOException e) {
-            requestContext.setAttribute("Error", "Bank account not found");
-            return () -> url;
+            return () -> url+"&error=Bank+account+not+found";
         }
         requestContext.setAttribute("BankAccount", bankAccounts);
         return () -> url;

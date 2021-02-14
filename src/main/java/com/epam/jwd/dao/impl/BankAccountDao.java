@@ -1,5 +1,6 @@
 package com.epam.jwd.dao.impl;
 
+import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.BankAccount;
 import com.epam.jwd.domain.Entity;
 import com.epam.jwd.exception.DAOException;
@@ -13,6 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of class {@link AbstractDao} parametrized with {@link BankAccount} class
+ */
 public class BankAccountDao extends AbstractDao<BankAccount> {
 
     private static BankAccountDao instance = new BankAccountDao();

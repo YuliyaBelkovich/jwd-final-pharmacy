@@ -1,6 +1,7 @@
 package com.epam.jwd.dao.impl;
 
 import com.epam.jwd.criteria.Criteria;
+import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.Entity;
 import com.epam.jwd.domain.Payment;
 import com.epam.jwd.exception.DAOException;
@@ -13,7 +14,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Implementation of class {@link AbstractDao} parametrized with {@link Payment} class
+ */
 public class PaymentDao extends AbstractDao<Payment> {
 
     private static PaymentDao instance = new PaymentDao();
@@ -22,7 +25,7 @@ public class PaymentDao extends AbstractDao<Payment> {
     private static final String ADD = "INSERT INTO payment (sum, IBAN, date_time) VALUES (?,?,?)";
     private static final String UPDATE = "UPDATE payment SET sum = ?, IBAN = ?, date_time = ? WHERE id = ?";
     private static final String DELETE = "DELETE FROM payment WHERE id = ?";
-    private static final String SEARCH_BY_ID = "SELECT * WHERE id = ?";
+    private static final String SEARCH_BY_ID = "SELECT * FROM payment WHERE id = ?";
 
     private PaymentDao(){}
 

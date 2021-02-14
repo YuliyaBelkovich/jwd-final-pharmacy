@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class AddAppointmentCommand implements Command {
-    //  private static final ResponseContext ADD_APPOINTMENT_RESULT = () -> "/pharmacy?command=go_to_doctor_page";
 
     @Override
     public ResponseContext execute(RequestContext requestContext) {
@@ -59,7 +58,6 @@ public class AddAppointmentCommand implements Command {
             patient = UserService.getInstance().findById(patientId);
             doctor = UserService.getInstance().findById(doctorId);
         } catch (DAOException | ValidationException | EntityNotFoundException e) {
-            requestContext.getSession().setAttribute("Error", e.getMessage());
             return () -> url+"&"+e.getMessage().replace(" ","+");
         }
         MailService.getInstance().sendTextEmail(doctor.getEmail(), "New Appointment", "Patient " + patient.getName() + " is signed up for an appointment " + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));

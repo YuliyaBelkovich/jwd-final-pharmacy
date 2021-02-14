@@ -29,6 +29,9 @@ import com.epam.jwd.service.entity.impl.*;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Enum with list of command attributes
+ */
 public enum CommandManager {
     START("start", new StartCommand(), CommandType.FORWARD),
     GO_TO_MAIN_PAGE("go_to_main_page", new GoToCommand(PageName.MAIN_PAGE), CommandType.FORWARD),

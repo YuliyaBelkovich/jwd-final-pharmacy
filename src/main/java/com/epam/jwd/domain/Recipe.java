@@ -4,6 +4,7 @@ import com.epam.jwd.annotation.RoleValidation;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 public class Recipe implements Entity {
 
@@ -94,5 +95,18 @@ public class Recipe implements Entity {
                 ", duration=" + duration +
                 ", doctorId=" + doctorId +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return id == recipe.id && patientId == recipe.patientId && medicineId == recipe.medicineId && Double.compare(recipe.dose, dose) == 0 && duration == recipe.duration && doctorId == recipe.doctorId && date.equals(recipe.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, patientId, medicineId, dose, duration, doctorId, date);
     }
 }

@@ -1,5 +1,6 @@
 package com.epam.jwd.dao.impl;
 
+import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.Entity;
 import com.epam.jwd.domain.Order;
 import com.epam.jwd.exception.DAOException;
@@ -13,7 +14,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Implementation of class {@link AbstractDao} parametrized with {@link Order} class
+ */
 public class OrderDao extends AbstractDao<Order> {
 
     private static OrderDao instance = new OrderDao();

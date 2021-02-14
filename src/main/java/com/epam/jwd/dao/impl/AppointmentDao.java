@@ -1,6 +1,7 @@
 package com.epam.jwd.dao.impl;
 
 import com.epam.jwd.domain.Appointment;
+import com.epam.jwd.domain.AppointmentWindow;
 import com.epam.jwd.domain.Entity;
 import com.epam.jwd.exception.DAOException;
 import com.epam.jwd.exception.FactoryException;
@@ -14,13 +15,16 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of class {@link AbstractDao} parametrized with {@link Appointment} class
+ */
 public class AppointmentDao extends AbstractDao<Appointment> {
 
     private static AppointmentDao instance = new AppointmentDao();
 
     private static final String SELECT_ALL = "SELECT * FROM appointment";
     private static final String ADD = "INSERT INTO appointment (patient_id, doctor_id, date_time, info, status) VALUES (?,?,?,?,?)";
-    private static final String UPDATE = "UPDATE appointment SET patient_id=?, doctor_id=?, date_time=?,status=? WHERE id=?";
+    private static final String UPDATE = "UPDATE appointment SET patient_id=?, doctor_id=?, date_time=?, info=?, status=? WHERE id=?";
     private static final String DELETE = "DELETE FROM appointment WHERE id=?";
     private static final String SEARCH_BY_ID = "SELECT * FROM appointment WHERE id= ?";
 
@@ -75,6 +79,7 @@ public class AppointmentDao extends AbstractDao<Appointment> {
         }
         return appointments;
     }
+
 
     @Override
     public void executeOperation(Appointment appointment, String operation) throws DAOException {

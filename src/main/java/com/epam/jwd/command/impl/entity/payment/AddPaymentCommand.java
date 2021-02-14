@@ -34,7 +34,6 @@ public class AddPaymentCommand implements Command {
             PaymentService.getInstance().createEntity(0, sum, iban, dateTime);
             //todo if validation or entity not found = message, if dao or factory - server error page
         } catch (FactoryException | DAOException | ValidationException | EntityNotFoundException e) {
-            requestContext.getSession().setAttribute("Error", e.getMessage());
             return () -> "/pharmacy?command=go_to_add_payment_page&error=" + e.getMessage().replace(" ", "+");
         }
         Order order = (Order) requestContext.getSession().getAttribute("order");
@@ -42,10 +41,11 @@ public class AddPaymentCommand implements Command {
         try {
             OrderService.getInstance().update(order);
         } catch (DAOException | ValidationException | EntityNotFoundException e) {
-            requestContext.getSession().setAttribute("Error", e.getMessage());
             return () -> "/pharmacy?command=go_to_add_payment_page&error=" + e.getMessage().replace(" ", "+");
         }
+
         //todo mail
+
         requestContext.getSession().setAttribute("basket",null);
         requestContext.getSession().setAttribute("basketPrice",null);
         return ADD_PAYMENT_SUCCESS;

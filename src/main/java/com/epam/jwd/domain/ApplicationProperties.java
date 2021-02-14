@@ -4,6 +4,17 @@ import com.epam.jwd.util.PropertyReaderUtil;
 
 import java.util.Properties;
 
+/**
+ * Class responsible for {@link com.epam.jwd.pool.ConnectionPool} properties
+ * Fields:
+ * url {@link String} - current schema url
+ * dbName {@link String} - database name
+ * user {@link String} - user name
+ * password {@link String}
+ * initConnections {@link int} - initial number of connections placed in the connection pool
+ * maxConnections {@link int} - maximum number of connections that could be placed in the connection pool
+ * propertiesFileName {@link String} - current properties file name
+ */
 public class ApplicationProperties {
 
     private static ApplicationProperties applicationProperties;

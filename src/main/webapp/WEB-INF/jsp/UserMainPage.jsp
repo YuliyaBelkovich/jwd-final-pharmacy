@@ -24,6 +24,8 @@
 </head>
 <body>
 <c:import url="MainHeader.jsp"/>
+<p class="text-primary">${param.message}</p>
+<p class="text-danger">${param.error}</p>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-link active" id="profile-tab" role="tab" href="#profile" data-bs-toggle="tab"
@@ -119,86 +121,6 @@
             </div>
             <div class="col-md-3">
                 <p class="text-danger">${requestScope.Error}</p>
-                <%--&lt;%&ndash;                ORDER&ndash;%&gt;--%>
-                <%--                <div>--%>
-                <%--                    <c:forEach items="${Orders}" var="order">--%>
-                <%--                    <ul class="list-group">--%>
-                <%--                        <label for="order_id">id</label>--%>
-                <%--                        <li class="list-group-item list-group-item-light" id="order_id"><c:out value="${order.id}"/> </li>--%>
-                <%--                        <label for="order_price">price</label>--%>
-                <%--                        <li class="list-group-item" id="order_price"><c:out value="${order.price}"/> </li>--%>
-                <%--                        <c:forEach items="${order.orderedMedicines}" var="orderMed">--%>
-                <%--                            <li class="list-group-item"><c:out value="${orderMed.name}, ${orderMed.dose}"/></li>--%>
-                <%--                        </c:forEach>--%>
-                <%--                    </ul>--%>
-                <%--                    </c:forEach>--%>
-                <%--                </div>--%>
-                <%--                APPOINTMENT--%>
-                <%--                <div>--%>
-                <%--                <c:forEach items="${Appointment}" var="appointment">--%>
-                <%--                <ul class="list-group">--%>
-                <%--                    <label for="appointment_id">id</label>--%>
-                <%--                    <li class="list-group-item list-group-item-light" id="appointment_id"><c:out value="${appointment.id}"/> </li>--%>
-                <%--                    <label for="result_patient">patient id</label>--%>
-                <%--                    <a href="/pharmacy?command=go_to_patient_page&patient_id=${appointment.patientId}">--%>
-                <%--                        <li class="list-group-item list-group-item-primary" id="result_patient"><c:out--%>
-                <%--                                value="${appointment.patientId}"/></li>--%>
-                <%--                    </a>--%>
-                <%--                    <label for="result_doctor">doctor id</label>--%>
-                <%--                    <a href="/pharmacy?command=go_to_doctor_page&doctor_id=${appointment.doctorId}">--%>
-                <%--                        <li class="list-group-item" id="result_doctor"><c:out--%>
-                <%--                                value="${appointment.doctorId}"/></li>--%>
-                <%--                    </a>--%>
-                <%--                    <label for="result_date">date time</label>--%>
-                <%--                    <li class="list-group-item list-group-item-primary" id="result_date"><c:out--%>
-                <%--                            value="${appointment.dateTime}"/></li>--%>
-                <%--                    <label for="result_info">date time</label>--%>
-                <%--                    <li class="list-group-item list-group-item-primary" id="result_info"><c:out--%>
-                <%--                            value="${appointment.info}"/></li>--%>
-                <%--                    <label for="result_status">status</label>--%>
-                <%--                    <li class="list-group-item list-group-item-primary" id="result_status">--%>
-                <%--                        <c:out--%>
-                <%--                                value="${appointment.appointmentStatus}"/>--%>
-                <%--                    </li>--%>
-                <%--                </ul>--%>
-                <%--                </c:forEach>--%>
-                <%--                </div>--%>
-                <%--&lt;%&ndash;                RECIPE&ndash;%&gt;--%>
-                <%--                <div>--%>
-                <%--                    <c:forEach items="${Recipe}" var="recipe">--%>
-                <%--                        <ul class="list-group">--%>
-                <%--                            <label for="recipe_id">id</label>--%>
-                <%--                            <a href="/pharmacy?command=go_to_recipe_page&recipe_id=${recipe.id}">--%>
-                <%--                                <li class="list-group-item list-group-item-light" id="recipe_id"><c:out--%>
-                <%--                                        value="${recipe.id}"/></li>--%>
-                <%--                            </a>--%>
-                <%--                            <label for="result_patient_recipe">patient id</label>--%>
-                <%--                            <a href="/pharmacy?command=go_to_patient_page&patient_id=${recipe.patientId}">--%>
-                <%--                                <li class="list-group-item list-group-item-primary" id="result_patient_recipe"><c:out--%>
-                <%--                                        value="${recipe.patientId}"/></li>--%>
-                <%--                            </a>--%>
-                <%--                            <label for="result_medicine">medicine id</label>--%>
-                <%--                            <a href="/pharmacy?command=go_to_medicine_page&medicine_id=${recipe.medicineId}">--%>
-                <%--                                <li class="list-group-item list-group-item-primary" id="result_medicine"><c:out--%>
-                <%--                                        value="${recipe.medicineId}"/></li>--%>
-                <%--                            </a>--%>
-                <%--                            <label for="result_doctor_recipe">doctor id</label>--%>
-                <%--                            <a href="/pharmacy?command=go_to_doctor_page&doctor_id=${recipe.doctorId}">--%>
-                <%--                                <li class="list-group-item" id="result_doctor_recipe"><c:out--%>
-                <%--                                        value="${recipe.doctorId}"/></li>--%>
-                <%--                            </a>--%>
-                <%--                            <label for="result_dose">dose</label>--%>
-                <%--                            <li class="list-group-item" id="result_dose"><c:out--%>
-                <%--                                    value="${recipe.dose}"/></li>--%>
-                <%--                            <label for="result_date_recipe">date</label>--%>
-                <%--                            <li class="list-group-item list-group-item-primary" id="result_date_recipe"><c:out--%>
-                <%--                                    value="${recipe.date}"/></li>--%>
-                <%--                            <label for="result_duration">duration</label>--%>
-                <%--                            <li class="list-group-item" id="result_duration"><c:out value="${recipe.duration}"/></li>--%>
-                <%--                        </ul>--%>
-                <%--                    </c:forEach>--%>
-                <%--                </div>--%>
-                <%--    RECIPE PROLONGATION REQUEST--%>
                 <div>
                     <c:forEach items="${Request}" var="request">
                         <ul class="list-group">
@@ -234,7 +156,7 @@
                             <li class="list-group-item list-group-item-light" id="bank_id">
                                 <c:out value="${bank.id}"/>
                             </li>
-                            <label for="bank_patient"><fmt:message key="request.recipe" bundle="${rb}"/></label>
+                            <label for="bank_patient"><fmt:message key="recipe.patient" bundle="${rb}"/></label>
                             <li class="list-group-item list-group-item-light" id="bank_patient">
                                 <c:out value="${bank.patientId}"/>
                             </li>

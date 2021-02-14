@@ -2,6 +2,8 @@ package com.epam.jwd.domain;
 
 import com.epam.jwd.annotation.StringValidation;
 
+import java.util.Objects;
+
 public class Medicine implements Entity {
 
     private int id;
@@ -78,5 +80,18 @@ public class Medicine implements Entity {
                 ", info='" + info + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Medicine medicine = (Medicine) o;
+        return id == medicine.id && Double.compare(medicine.dose, dose) == 0 && recipeRequirement == medicine.recipeRequirement && Double.compare(medicine.price, price) == 0 && name.equals(medicine.name) && Objects.equals(info, medicine.info);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, dose, recipeRequirement, info, price);
     }
 }

@@ -101,18 +101,17 @@
                 <div class="col-md-3">
                     <small>
                         <div class="d-none" id="updateStatusForm${patient.id}">
-                            <form action="${pageContext.request.contextPath}/pharmacy" method="POST">
-                                <input type="hidden" name="command" value="update_user">
-                                <input type="hidden" name="user_id" value="${patient.id}">
-                                <input type="hidden" name="user_name" value="${patient.name}">
-                                <input type="hidden" name="user_email" value="${patient.email}">
-                                <input type="hidden" name="user_password" value="${patient.password}">
+                            <form action="${pageContext.request.contextPath}/pharmacy" method="POST" class="needs-validation" novalidate>
+                                <input type="hidden" name="command" value="update_user" required>
+                                <input type="hidden" name="user_id" value="${patient.id}" required>
+                                <input type="hidden" name="user_name" value="${patient.name}" required>
+                                <input type="hidden" name="user_email" value="${patient.email}" required>
                                 <input type="hidden" name="user_role" value="PATIENT">
                                 <div class="form-group">
                                     <label for="update_status_user"><fmt:message key="user.status" bundle="${rb}"/></label>
                                     <input type="search" name="user_status" class="form-control" list="updateStatus"
                                            id="update_status_user"
-                                           placeholder="<fmt:message key="user.status.placeholder" bundle="${rb}"/>">
+                                           placeholder="<fmt:message key="user.status.placeholder" bundle="${rb}"/>" required>
                                 </div>
                                 <datalist id="updateStatus">
                                     <option value="ACTIVE" label="ACTIVE">
@@ -140,6 +139,28 @@
     function closeUpdate(id) {
         document.getElementById("updateStatusForm"+id).classList.replace("d-block", "d-none");
     }
+</script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 </script>
 </body>
 </html>
