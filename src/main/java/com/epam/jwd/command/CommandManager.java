@@ -24,10 +24,12 @@ import com.epam.jwd.context.PageName;
 import com.epam.jwd.context.RequestContext;
 import com.epam.jwd.context.ResponseContext;
 import com.epam.jwd.domain.Role;
+import com.epam.jwd.exception.CommandException;
 import com.epam.jwd.service.entity.impl.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Enum with list of command attributes
@@ -48,6 +50,7 @@ public enum CommandManager {
     GO_TO_SEARCH_ORDER_PAGE("go_to_search_order_page", new GoToCommand(PageName.SEARCH_ORDER_PAGE), CommandType.FORWARD, Role.PATIENT, Role.PHARMACIST),
     GO_TO_ADD_PAYMENT_PAGE("go_to_add_payment_page", new GoToCommand(PageName.ADD_PAYMENT), CommandType.FORWARD, Role.PATIENT, Role.GUEST),
     GO_TO_PAYMENT_SUCCESS_PAGE("go_to_payment_success_page", new GoToCommand(PageName.PAYMENT_SUCCESS), CommandType.FORWARD, Role.PATIENT, Role.GUEST),
+    GO_TO_COMMAND_NOT_FOUND_PAGE("go_to_command_not_found_page",new GoToCommand(PageName.COMMAND_NOT_FOUND),CommandType.FORWARD),
 
     SEARCH_MEDICINE("search_medicine", new SearchMedicineCommand(), CommandType.FORWARD),
     ADD_MEDICINE("add_medicine", new AddMedicineCommand(), CommandType.REDIRECT, Role.PHARMACIST),
@@ -125,11 +128,12 @@ public enum CommandManager {
         return type;
     }
 
-    public static CommandManager resolveCommandByName(String commandName) {
-        return Arrays.stream(values())
+    public static CommandManager resolveCommandByName(String commandName) throws CommandException {
+        Optional<CommandManager> optionalCommandManager =  Arrays.stream(values())
                 .filter(commandManager1 -> commandManager1.getCommandName().equals(commandName))
-                .findAny()
-                .get();
+                .findAny();
+        return optionalCommandManager.orElseThrow(()->new CommandException("Command not found"));
+
     }
 
 

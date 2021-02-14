@@ -24,7 +24,8 @@ public enum PageName {
     BASKET_PAGE("/WEB-INF/jsp/BasketPage.jsp"),
     ADD_PAYMENT("/WEB-INF/jsp/AddPaymentPage.jsp"),
     PAYMENT_SUCCESS("/WEB-INF/jsp/PaymentSuccess.jsp"),
-    USER_PAGE("/WEB-INF/jsp/UserMainPage.jsp");
+    USER_PAGE("/WEB-INF/jsp/UserMainPage.jsp"),
+    COMMAND_NOT_FOUND("/WEB-INF/jsp/CommandNotFound.jsp");
 
 
     private final String jspFileName;
