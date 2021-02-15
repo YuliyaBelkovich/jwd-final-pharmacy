@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="http://example.com/functions" prefix="f" %>
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 <fmt:setBundle basename="${sessionScope.rb}" var="rb"/>
 <html>
@@ -143,7 +144,8 @@
                             <label for="window_doctor"><fmt:message key="request.doctor" bundle="${rb}"/></label>
                             <li class="list-group-item" id="window_doctor"><c:out value="${window.doctorId}"/></li>
                             <label for="window_date"><fmt:message key="recipe.date" bundle="${rb}"/></label>
-                            <li class="list-group-item" id="window_date"><c:out value="${window.dateTime}"/></li>
+                            <li class="list-group-item" id="window_date"><c:out value="${f:formatLocalDateTime(window.dateTime, 'yyyy-MM-dd HH:mm')}"/></li>
+                            <li>...</li>
                         </ul>
                     </c:forEach>
                 </div>

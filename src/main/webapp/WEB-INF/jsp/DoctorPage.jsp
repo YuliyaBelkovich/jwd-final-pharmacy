@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="http://example.com/functions" prefix="f" %>
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 <fmt:setBundle basename="${sessionScope.rb}" var="rb"/>
 <html>
@@ -65,7 +66,7 @@
         <div id="timeslots">
             <ul class="list-group">
                 <c:forEach items="${Window}" var="window">
-                    <a href="/pharmacy?command=add_appointment&appointment_patient=${sessionScope.user_id}&appointment_doctor=${doctor.id}&appointment_date=${window.dateTime}"> <li class="list-group-item"><c:out value="${window.dateTime}"/></li></a>
+                    <a href="/pharmacy?command=add_appointment&appointment_patient=${sessionScope.user_id}&appointment_doctor=${doctor.id}&appointment_date=${window.dateTime}"> <li class="list-group-item"><c:out value="${f:formatLocalDateTime(window.dateTime, 'yyyy-MM-dd HH:mm')}"/></li></a>
                 </c:forEach>
             </ul>
         </div>

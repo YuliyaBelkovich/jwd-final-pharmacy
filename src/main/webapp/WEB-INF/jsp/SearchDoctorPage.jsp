@@ -53,7 +53,7 @@
                 <option value="BANNED" label="BANNED">
                 <option value="PENDING" label="PENDING">
             </datalist>
-            <p>   </p>
+            <p></p>
             <button type="submit" class="btn btn-success"><fmt:message key="search.find" bundle="${rb}"/></button>
         </form>
     </div>
@@ -96,7 +96,8 @@
                 <div class="col-md-2">
                     <c:if
                             test="${sessionScope.user_role == 'PHARMACIST'}">
-                        <button type="button" onclick="openUpdate(${doctor.id})" class="btn btn-warning"><fmt:message key="user.button.update" bundle="${rb}"/></button>
+                        <button type="button" onclick="openUpdate(${doctor.id})" class="btn btn-warning"><fmt:message
+                                key="user.button.update" bundle="${rb}"/></button>
                     </c:if>
                 </div>
 
@@ -104,28 +105,33 @@
                 <div class="col-md-3">
                     <small>
                         <div class="d-none" id="updateStatusForm${doctor.id}">
-                            <form action="${pageContext.request.contextPath}/pharmacy" method="POST" class="needs-validation" novalidate>
+                            <form action="${pageContext.request.contextPath}/pharmacy" method="POST"
+                                  class="needs-validation" novalidate>
                                 <input type="hidden" name="command" value="update_user" required>
                                 <input type="hidden" name="user_id" value="${doctor.id}" required>
                                 <input type="hidden" name="user_name" value="${doctor.name}" required>
                                 <input type="hidden" name="user_email" value="${doctor.email}" required>
                                 <input type="hidden" name="user_role" value="DOCTOR">
                                 <div class="form-group">
-                                    <label for="update_status_user"><fmt:message key="user.status" bundle="${rb}"/></label>
+                                    <label for="update_status_user"><fmt:message key="user.status"
+                                                                                 bundle="${rb}"/></label>
                                     <input type="search" name="user_status" class="form-control" list="updateStatus"
                                            id="update_status_user"
-                                           placeholder="<fmt:message key="user.status.placeholder" bundle="${rb}"/>" required>
+                                           placeholder="<fmt:message key="user.status.placeholder" bundle="${rb}"/>"
+                                           required>
                                 </div>
                                 <datalist id="updateStatus">
                                     <option value="ACTIVE" label="ACTIVE">
                                     <option value="BANNED" label="BANNED">
                                     <option value="PENDING" label="PENDING">
                                 </datalist>
-                                <p>   </p>
-                                <button type="submit" class="btn btn-success"><fmt:message key="user.button.update" bundle="${rb}"/></button>
+                                <p></p>
+                                <button type="submit" class="btn btn-success"><fmt:message key="user.button.update"
+                                                                                           bundle="${rb}"/></button>
                             </form>
                             <small>
-                                <button onclick="closeUpdate(${doctor.id})" class="btn btn-danger"><fmt:message key="user.button.close" bundle="${rb}"/></button>
+                                <button onclick="closeUpdate(${doctor.id})" class="btn btn-danger"><fmt:message
+                                        key="user.button.close" bundle="${rb}"/></button>
                             </small>
                         </div>
                     </small>
@@ -136,11 +142,11 @@
 </div>
 <script>
     function openUpdate(id) {
-        document.getElementById("updateStatusForm"+id).classList.replace("d-none", "d-block");
+        document.getElementById("updateStatusForm" + id).classList.replace("d-none", "d-block");
     }
 
     function closeUpdate(id) {
-        document.getElementById("updateStatusForm"+id).classList.replace("d-block", "d-none");
+        document.getElementById("updateStatusForm" + id).classList.replace("d-block", "d-none");
     }
 </script>
 <script>

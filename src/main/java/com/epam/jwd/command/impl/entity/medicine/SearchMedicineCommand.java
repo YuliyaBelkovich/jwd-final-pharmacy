@@ -23,12 +23,15 @@ public class SearchMedicineCommand implements Command {
 
     @Override
     public ResponseContext execute(RequestContext requestContext) {
-
+        int id =0;
         String nameMedicine = null;
         boolean recipe_requirement = false;
         boolean non_recipe_requirement = false;
         double dose = 0;
         double price = 0;
+        if(requestContext.hasParameter("medicine_id")){
+            id=Integer.parseInt(requestContext.getParameter("medicine_id"));
+        }
         if (requestContext.hasParameter("medicine_name")) {
             nameMedicine = requestContext.getParameter("medicine_name");
         }
@@ -52,6 +55,7 @@ public class SearchMedicineCommand implements Command {
         }
         Criteria<Medicine> criteria = MedicineCriteria
                 .builder()
+                .id(id)
                 .setName(nameMedicine)
                 .setRecipeRequirement(recipe_requirement)
                 .setNonRecipeRequirement(non_recipe_requirement)

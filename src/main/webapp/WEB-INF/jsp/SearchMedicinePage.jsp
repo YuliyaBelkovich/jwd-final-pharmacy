@@ -36,7 +36,7 @@
             <c:if test="${sessionScope.user_role=='DOCTOR' or sessionScope.user_role=='PHARMACIST' }">
                 <div class="form-group">
                     <label for="id">id</label>
-                    <input type="number" name="medicine_id" min="1" step="1" class="form-control" id="id"
+                    <input type="number" name="medicine_id" min="1" step="1"  class="form-control" id="id"
                            placeholder="Enter medicine id">
                 </div>
             </c:if>

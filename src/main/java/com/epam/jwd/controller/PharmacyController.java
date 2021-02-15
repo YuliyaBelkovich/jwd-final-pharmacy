@@ -28,7 +28,7 @@ public class PharmacyController extends HttpServlet {
             type = CommandManager.resolveCommandByName(command).getType();
             page = CommandManager.resolveCommandByName(command).execute(new CustomRequestContext(req)).getPage();
         } catch (CommandException e) {
-            req.getRequestDispatcher(PageName.COMMAND_NOT_FOUND.getJspFileName()).forward(req,resp);
+            req.getRequestDispatcher(PageName.COMMAND_NOT_FOUND.getJspFileName()).forward(req, resp);
         }
 
         if (type.equals(CommandType.FORWARD)) {
@@ -48,7 +48,7 @@ public class PharmacyController extends HttpServlet {
             type = CommandManager.resolveCommandByName(command).getType();
             page = CommandManager.resolveCommandByName(command).execute(new CustomRequestContext(req)).getPage();
         } catch (CommandException e) {
-            req.getRequestDispatcher(PageName.COMMAND_NOT_FOUND.getJspFileName()).forward(req,resp);
+            req.getRequestDispatcher(PageName.COMMAND_NOT_FOUND.getJspFileName()).forward(req, resp);
         }
         if (type.equals(CommandType.FORWARD)) {
             req.getRequestDispatcher(page).forward(req, resp);
